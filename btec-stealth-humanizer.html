@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTEC Stealth Humanizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4aa;
+            --primary-dim: rgba(0, 212, 170, 0.15);
+            --secondary: #008f7a;
+            --accent: #00ffcc;
+            --bg: #0a0a0f;
+            --surface: #14141f;
+            --surface-2: #1c1c2e;
+            --surface-3: #24243a;
+            --text: #e8e8f0;
+            --text-dim: #8888a0;
+            --border: #2a2a40;
+            --danger: #ff4466;
+            --warning: #ffaa00;
+            --success: #00dd88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(0, 212, 170, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 100, 200, 0.03) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 120px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .stat-card .value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .stat-card .value.warning { color: var(--warning); }
+        .stat-card .value.danger { color: var(--danger); }
+        .stat-card .value.success { color: var(--success); }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mode-btn {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-dim);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .mode-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+        .mode-btn.active {
+            background: var(--primary-dim);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Slider */
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 212, 170, 0.4);
+        }
+
+        .slider-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 36px;
+            text-align: right;
+        }
+
+        /* Toggles Row */
+        .toggles-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .toggle-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .toggle-chip:hover { border-color: var(--primary); color: var(--text); }
+
+        .toggle-chip.active {
+            background: var(--primary-dim);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .toggle-chip .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.2s;
+        }
+
+        .toggle-chip.active .dot { background: var(--primary); }
+
+        /* Textarea Areas */
+        .editor-section {
+            margin-bottom: 16px;
+        }
+
+        .editor-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .editor-label span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .editor-label .char-count {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            resize: vertical;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-family: inherit;
+            background-color: var(--surface);
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-dim);
+        }
+
+        textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
+        textarea[readonly] { cursor: default; }
+
+        /* Action Buttons */
+        .action-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 20px rgba(0, 212, 170, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-3);
+            border-color: var(--text-dim);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Loading animation */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .btn.loading .spinner { display: inline-block; }
+        .btn.loading .btn-text { display: none; }
+
+        /* Diff View */
+        .diff-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .diff-panel.visible { display: block; }
+
+        .diff-panel h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .diff-line { font-size: 0.85rem; line-height: 1.8; font-family: 'Courier New', monospace; }
+        .diff-added { color: var(--success); background: rgba(0, 221, 136, 0.08); padding: 0 4px; border-radius: 3px; }
+        .diff-removed { color: var(--danger); background: rgba(255, 68, 102, 0.08); padding: 0 4px; border-radius: 3px; text-decoration: line-through; }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--surface-2);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* History Panel */
+        .history-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .history-panel.visible { display: block; }
+
+        .history-panel h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .history-item:hover { background: var(--surface-2); }
+
+        .history-item .preview {
+            font-size: 0.82rem;
+            color: var(--text);
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 12px;
+        }
+
+        .history-item .meta {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.5rem; }
+            .controls-row { flex-direction: column; gap: 12px; }
+            .stat-card { min-width: 80px; }
+            .action-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BTEC Stealth Humanizer</h1>
+            <p class="subtitle">Advanced AI text transformation engine with multi-layer humanization</p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="label">Words</div>
+                <div class="value" id="word-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Sentences</div>
+                <div class="value" id="sentence-count">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">AI Score</div>
+                <div class="value" id="ai-score">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Changes</div>
+                <div class="value" id="change-count">0</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-panel">
+            <div class="controls-row">
+                <div class="control-group">
+                    <label>Mode</label>
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="balanced">Balanced</button>
+                        <button class="mode-btn" data-mode="aggressive">Aggressive</button>
+                        <button class="mode-btn" data-mode="subtle">Subtle</button>
+                        <button class="mode-btn" data-mode="academic">Academic</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Intensity</label>
+                    <div class="slider-container">
+                        <input type="range" id="intensity-slider" min="0" max="100" value="50">
+                        <span class="slider-value" id="intensity-value">50%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="toggles-row">
+                <div class="toggle-chip active" data-feature="synonyms"><span class="dot"></span>Synonym Swap</div>
+                <div class="toggle-chip active" data-feature="structure"><span class="dot"></span>Restructure</div>
+                <div class="toggle-chip active" data-feature="filler"><span class="dot"></span>Filler Words</div>
+                <div class="toggle-chip active" data-feature="contractions"><span class="dot"></span>Contractions</div>
+                <div class="toggle-chip" data-feature="typos"><span class="dot"></span>Minor Typos</div>
+                <div class="toggle-chip active" data-feature="transitions"><span class="dot"></span>Transitions</div>
+                <div class="toggle-chip active" data-feature="remove-ai"><span class="dot"></span>Remove AI-isms</div>
+                <div class="toggle-chip" data-feature="passive"><span class="dot"></span>Passive Voice</div>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="editor-section">
+            <div class="editor-label">
+                <span>Input Text</span>
+                <span class="char-count" id="input-chars">0 characters</span>
+            </div>
+            <textarea id="input-text" placeholder="Paste your AI-generated text here. The humanizer will transform it using multiple layers of natural language processing to produce undetectable, human-like output."></textarea>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-row">
+            <button class="btn btn-primary" id="humanize-btn">
+                <span class="btn-text">Humanize Text</span>
+                <span class="spinner"></span>
+            </button>
+            <button class="btn btn-secondary" id="copy-btn" disabled>Copy</button>
+            <button class="btn btn-secondary" id="clear-btn">Clear</button>
+            <button class="btn btn-secondary" id="history-btn">History</button>
+        </div>
+
+        <!-- Output -->
+        <div class="editor-section">
+            <div class="editor-label">
+                <span>Humanized Output</span>
+                <span class="char-count" id="output-chars">0 characters</span>
+            </div>
+            <textarea id="output-text" readonly placeholder="Humanized text will appear here..."></textarea>
+        </div>
+
+        <!-- Diff View -->
+        <div class="diff-panel" id="diff-panel">
+            <h3>Changes Made</h3>
+            <div id="diff-content"></div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel" id="history-panel">
+            <h3>Recent Transformations</h3>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // --- DOM refs ---
+        const inputText = document.getElementById('input-text');
+        const outputText = document.getElementById('output-text');
+        const humanizeBtn = document.getElementById('humanize-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const historyBtn = document.getElementById('history-btn');
+        const intensitySlider = document.getElementById('intensity-slider');
+        const intensityValue = document.getElementById('intensity-value');
+        const inputChars = document.getElementById('input-chars');
+        const outputChars = document.getElementById('output-chars');
+        const wordCount = document.getElementById('word-count');
+        const sentenceCount = document.getElementById('sentence-count');
+        const aiScore = document.getElementById('ai-score');
+        const changeCount = document.getElementById('change-count');
+        const diffPanel = document.getElementById('diff-panel');
+        const diffContent = document.getElementById('diff-content');
+        const historyPanel = document.getElementById('history-panel');
+        const historyList = document.getElementById('history-list');
+        const toast = document.getElementById('toast');
+
+        let currentMode = 'balanced';
+        let features = { synonyms: true, structure: true, filler: true, contractions: true, typos: false, transitions: true, 'remove-ai': true, passive: false };
+        let history = JSON.parse(localStorage.getItem('humanizer-history') || '[]');
+        let totalChanges = 0;
+
+        // --- Extensive synonym dictionary ---
+        const synonymMap = {
+            'important': ['crucial', 'vital', 'essential', 'key', 'significant', 'meaningful', 'notable'],
+            'furthermore': ['also', 'plus', 'on top of that', 'besides', 'what\'s more'],
+            'consequently': ['so', 'as a result', 'because of this', 'that\'s why', 'this means'],
+            'however': ['but', 'though', 'still', 'yet', 'that said', 'on the flip side'],
+            'therefore': ['so', 'which means', 'that\'s why', 'for this reason', 'because of that'],
+            'additionally': ['also', 'plus', 'on top of that', 'and', 'not only that'],
+            'significant': ['major', 'big', 'notable', 'meaningful', 'considerable', 'substantial'],
+            'utilize': ['use', 'work with', 'rely on', 'employ', 'leverage'],
+            'implement': ['put in place', 'set up', 'roll out', 'carry out', 'apply'],
+            'demonstrate': ['show', 'prove', 'make clear', 'highlight', 'illustrate'],
+            'establish': ['set up', 'create', 'build', 'form', 'put together'],
+            'numerous': ['many', 'a lot of', 'plenty of', 'loads of', 'a bunch of'],
+            'sufficient': ['enough', 'adequate', 'plenty', 'decent'],
+            'approximately': ['about', 'around', 'roughly', 'close to', 'nearly'],
+            'commence': ['start', 'begin', 'kick off', 'get going'],
+            'terminate': ['end', 'stop', 'wrap up', 'finish', 'conclude'],
+            'facilitate': ['help', 'make easier', 'support', 'enable', 'assist with'],
+            'indicate': ['show', 'suggest', 'point to', 'hint at', 'signal'],
+            'obtain': ['get', 'grab', 'pick up', 'acquire', 'secure'],
+            'regarding': ['about', 'when it comes to', 'on the topic of', 'as for'],
+            'comprehensive': ['thorough', 'complete', 'full', 'detailed', 'in-depth'],
+            'subsequently': ['then', 'after that', 'next', 'later', 'following this'],
+            'primarily': ['mainly', 'mostly', 'for the most part', 'largely'],
+            'nevertheless': ['still', 'even so', 'regardless', 'all the same'],
+            'fundamental': ['basic', 'core', 'key', 'essential', 'central'],
+            'substantial': ['big', 'large', 'considerable', 'major', 'decent-sized'],
+            'prevalent': ['common', 'widespread', 'frequent', 'typical'],
+            'inherent': ['built-in', 'natural', 'core', 'innate'],
+            'optimal': ['best', 'ideal', 'perfect', 'top'],
+            'adequate': ['enough', 'decent', 'sufficient', 'acceptable'],
+            'endeavor': ['try', 'attempt', 'effort', 'push'],
+            'paradigm': ['model', 'framework', 'approach', 'way of thinking'],
+            'methodology': ['method', 'approach', 'process', 'system'],
+            'multifaceted': ['complex', 'many-sided', 'varied', 'diverse'],
+            'delve': ['dig into', 'explore', 'look into', 'examine'],
+            'realm': ['area', 'field', 'domain', 'world', 'space'],
+            'crucial': ['key', 'vital', 'essential', 'really important'],
+            'moreover': ['also', 'plus', 'besides', 'what\'s more', 'and'],
+            'pertaining': ['related to', 'about', 'regarding', 'connected to'],
+            'ascertain': ['find out', 'figure out', 'determine', 'work out'],
+            'plethora': ['a lot of', 'loads of', 'tons of', 'plenty of'],
+            'meticulous': ['careful', 'thorough', 'detailed', 'precise'],
+            'elucidate': ['explain', 'clarify', 'make clear', 'spell out'],
+            'necessitate': ['require', 'need', 'call for', 'demand'],
+            'encompasses': ['includes', 'covers', 'involves', 'contains'],
+            'articulate': ['express', 'put into words', 'describe', 'convey'],
+            'underpinning': ['foundation', 'basis', 'backbone', 'core'],
+        };
+
+        // --- AI phrase patterns to remove/replace ---
+        const aiPhrases = [
+            { pattern: /\bIt is important to note that\b/gi, replacements: ['Worth mentioning,', 'One thing to keep in mind is', 'Something to note here is'] },
+            { pattern: /\bIt is worth noting that\b/gi, replacements: ['Interestingly,', 'On that note,', 'Something worth pointing out:'] },
+            { pattern: /\bIn conclusion\b/gi, replacements: ['All in all', 'To wrap things up', 'So overall', 'At the end of the day'] },
+            { pattern: /\bIn summary\b/gi, replacements: ['To sum it up', 'Basically', 'Long story short', 'The bottom line is'] },
+            { pattern: /\bdelve into\b/gi, replacements: ['look into', 'dig into', 'explore', 'get into'] },
+            { pattern: /\bin the realm of\b/gi, replacements: ['in the world of', 'when it comes to', 'in the field of', 'in'] },
+            { pattern: /\bIt('|')s important to\b/gi, replacements: ['You should', 'We need to', 'It helps to', 'Make sure to'] },
+            { pattern: /\bplays a (crucial|vital|pivotal|key) role\b/gi, replacements: ['matters a lot', 'is really important', 'makes a big difference', 'is a big deal'] },
+            { pattern: /\bThis (essay|article|paper|text) (will )?(explore|examine|discuss|analyze)\b/gi, replacements: ['I\'m going to talk about', 'Let\'s look at', 'Here we\'ll cover', 'I want to go over'] },
+            { pattern: /\bin today('|')s (world|society|age|era|landscape)\b/gi, replacements: ['these days', 'right now', 'nowadays', 'currently'] },
+            { pattern: /\ba myriad of\b/gi, replacements: ['lots of', 'many', 'a bunch of', 'all kinds of'] },
+            { pattern: /\bfoster(s|ing)?\b/gi, replacements: ['build$1', 'encourage$1', 'support$1', 'grow$1'] },
+            { pattern: /\bnavigat(e|es|ing)\b/gi, replacements: ['deal with', 'handle', 'work through', 'manage'] },
+            { pattern: /\blandscape\b/gi, replacements: ['scene', 'situation', 'environment', 'space'] },
+            { pattern: /\beverchanging\b/gi, replacements: ['always changing', 'constantly shifting'] },
+            { pattern: /\bever-evolving\b/gi, replacements: ['constantly changing', 'always shifting'] },
+            { pattern: /\btapestry\b/gi, replacements: ['mix', 'collection', 'blend'] },
+            { pattern: /\bpivotal\b/gi, replacements: ['key', 'major', 'turning-point', 'critical'] },
+            { pattern: /\bundeniably\b/gi, replacements: ['clearly', 'obviously', 'without question'] },
+            { pattern: /\brobust\b/gi, replacements: ['strong', 'solid', 'reliable', 'powerful'] },
+            { pattern: /\bseamless(ly)?\b/gi, replacements: ['smooth$1', 'easy', 'effortless$1'] },
+            { pattern: /\bholistic\b/gi, replacements: ['overall', 'complete', 'full', 'well-rounded'] },
+            { pattern: /\bsynergy\b/gi, replacements: ['collaboration', 'teamwork', 'combined effort'] },
+            { pattern: /\bleverag(e|es|ing)\b/gi, replacements: ['us$1', 'take advantage of', 'make use of'] },
+        ];
+
+        // --- Contraction map ---
+        const contractionMap = {
+            'I am': 'I\'m', 'I have': 'I\'ve', 'I will': 'I\'ll', 'I would': 'I\'d',
+            'you are': 'you\'re', 'you have': 'you\'ve', 'you will': 'you\'ll', 'you would': 'you\'d',
+            'he is': 'he\'s', 'she is': 'she\'s', 'it is': 'it\'s', 'it has': 'it\'s',
+            'we are': 'we\'re', 'we have': 'we\'ve', 'we will': 'we\'ll', 'we would': 'we\'d',
+            'they are': 'they\'re', 'they have': 'they\'ve', 'they will': 'they\'ll', 'they would': 'they\'d',
+            'that is': 'that\'s', 'that has': 'that\'s',
+            'who is': 'who\'s', 'who has': 'who\'s',
+            'what is': 'what\'s', 'what has': 'what\'s',
+            'where is': 'where\'s', 'where has': 'where\'s',
+            'there is': 'there\'s', 'there has': 'there\'s',
+            'here is': 'here\'s',
+            'do not': 'don\'t', 'does not': 'doesn\'t', 'did not': 'didn\'t',
+            'is not': 'isn\'t', 'are not': 'aren\'t', 'was not': 'wasn\'t', 'were not': 'weren\'t',
+            'has not': 'hasn\'t', 'have not': 'haven\'t', 'had not': 'hadn\'t',
+            'will not': 'won\'t', 'would not': 'wouldn\'t',
+            'can not': 'can\'t', 'cannot': 'can\'t', 'could not': 'couldn\'t',
+            'should not': 'shouldn\'t', 'shall not': 'shan\'t',
+            'might not': 'mightn\'t', 'must not': 'mustn\'t',
+            'let us': 'let\'s',
+        };
+
+        // --- Human filler/discourse markers ---
+        const fillerPhrases = [
+            'honestly,', 'to be fair,', 'I mean,', 'the thing is,', 'basically,',
+            'look,', 'in a way,', 'if you think about it,', 'the way I see it,',
+            'truth be told,', 'at the end of the day,', 'for what it\'s worth,',
+        ];
+
+        // --- Transition variations ---
+        const transitionMap = {
+            'First,': ['First off,', 'To start,', 'For starters,', 'Starting with,'],
+            'Second,': ['Next,', 'Then,', 'Moving on,', 'After that,'],
+            'Third,': ['On top of that,', 'Another thing is,', 'Also,'],
+            'Finally,': ['Last but not least,', 'And lastly,', 'To finish off,'],
+            'For example,': ['Like,', 'For instance,', 'Take this:', 'Say,'],
+            'In addition,': ['Also,', 'Plus,', 'On top of that,', 'And,'],
+            'On the other hand,': ['But then again,', 'At the same time,', 'Then again,'],
+            'As a result,': ['So,', 'Because of this,', 'That\'s why,'],
+        };
+
+        // --- Sentence starters for variation ---
+        const sentenceStarters = [
+            'The thing is, ', 'What\'s interesting here is that ', 'When you look at it, ',
+            'From what I\'ve seen, ', 'In my experience, ', 'Honestly, ',
+            'It\'s worth pointing out that ', 'One thing that stands out is ',
+        ];
+
+        // --- Mode-specific intensity multipliers ---
+        const modeMultipliers = {
+            subtle: 0.3,
+            balanced: 0.6,
+            aggressive: 0.9,
+            academic: 0.5,
+        };
+
+        // --- Utility ---
+        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function chance(probability) { return Math.random() < probability; }
+        function countWords(text) { return text.trim() ? text.trim().split(/\s+/).length : 0; }
+        function countSentences(text) { return text.trim() ? text.split(/[.!?]+/).filter(s => s.trim()).length : 0; }
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // --- Humanization Pipeline ---
+
+        function applyContractions(text, intensity) {
+            if (!features.contractions) return text;
+            for (const [full, contracted] of Object.entries(contractionMap)) {
+                const regex = new RegExp('\\b' + full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                text = text.replace(regex, (match) => {
+                    if (chance(intensity)) { totalChanges++; return contracted; }
+                    return match;
+                });
+            }
+            return text;
+        }
+
+        function applySynonymSwap(text, intensity) {
+            if (!features.synonyms) return text;
+            for (const [word, syns] of Object.entries(synonymMap)) {
+                const regex = new RegExp('\\b' + word + '\\b', 'gi');
+                text = text.replace(regex, (match) => {
+                    if (chance(intensity * 0.7)) {
+                        totalChanges++;
+                        let replacement = pick(syns);
+                        // preserve capitalization
+                        if (match[0] === match[0].toUpperCase()) {
+                            replacement = replacement.charAt(0).toUpperCase() + replacement.slice(1);
+                        }
+                        return replacement;
+                    }
+                    return match;
+                });
+            }
+            return text;
+        }
+
+        function removeAIPhrases(text, intensity) {
+            if (!features['remove-ai']) return text;
+            for (const { pattern, replacements } of aiPhrases) {
+                text = text.replace(pattern, (match) => {
+                    if (chance(Math.max(intensity, 0.6))) {
+                        totalChanges++;
+                        let r = pick(replacements);
+                        // Handle backreferences like $1
+                        // simple approach: just return the replacement
+                        if (match[0] === match[0].toUpperCase() && r[0] !== r[0].toUpperCase()) {
+                            r = r.charAt(0).toUpperCase() + r.slice(1);
+                        }
+                        return r;
+                    }
+                    return match;
+                });
+            }
+            return text;
+        }
+
+        function addFillerWords(text, intensity) {
+            if (!features.filler) return text;
+            const sentences = text.split(/(?<=[.!?])\s+/);
+            const result = sentences.map((sentence, i) => {
+                // Don't add fillers to every sentence -- roughly every 3-5 sentences
+                if (i > 0 && chance(intensity * 0.25)) {
+                    totalChanges++;
+                    const filler = pick(fillerPhrases);
+                    // Capitalize filler start
+                    const f = filler.charAt(0).toUpperCase() + filler.slice(1);
+                    // Lowercase the sentence start
+                    const s = sentence.charAt(0).toLowerCase() + sentence.slice(1);
+                    return f + ' ' + s;
+                }
+                return sentence;
+            });
+            return result.join(' ');
+        }
+
+        function applyTransitions(text, intensity) {
+            if (!features.transitions) return text;
+            for (const [original, alternatives] of Object.entries(transitionMap)) {
+                const regex = new RegExp('\\b' + original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+                text = text.replace(regex, (match) => {
+                    if (chance(intensity * 0.7)) {
+                        totalChanges++;
+                        return pick(alternatives);
+                    }
+                    return match;
+                });
+            }
+            return text;
+        }
+
+        function restructureSentences(text, intensity) {
+            if (!features.structure) return text;
+            const sentences = text.split(/(?<=[.!?])\s+/);
+            const result = sentences.map((sentence) => {
+                if (!chance(intensity * 0.2)) return sentence;
+
+                // Split compound sentences and rearrange clauses
+                const commaIdx = sentence.indexOf(', ');
+                if (commaIdx > 15 && commaIdx < sentence.length - 15) {
+                    const firstPart = sentence.substring(0, commaIdx);
+                    let secondPart = sentence.substring(commaIdx + 2);
+                    if (chance(0.5)) {
+                        totalChanges++;
+                        // Move second clause first
+                        const cap = secondPart.charAt(0).toUpperCase() + secondPart.slice(1);
+                        const low = firstPart.charAt(0).toLowerCase() + firstPart.slice(1);
+                        // Remove trailing period from cap if exists, add to end
+                        const period = cap.endsWith('.') ? '' : '.';
+                        return cap.replace(/\.$/, '') + ', ' + low + period;
+                    }
+                }
+
+                // Occasionally add a sentence starter
+                if (chance(intensity * 0.15) && !sentence.match(/^(The thing|What's|When you|From what|In my|Honestly|It's worth|One thing)/i)) {
+                    totalChanges++;
+                    const starter = pick(sentenceStarters);
+                    return starter + sentence.charAt(0).toLowerCase() + sentence.slice(1);
+                }
+
+                return sentence;
+            });
+            return result.join(' ');
+        }
+
+        function addMinorTypos(text, intensity) {
+            if (!features.typos) return text;
+            const words = text.split(' ');
+            const result = words.map(word => {
+                // Very low chance -- only for aggressive/typo mode
+                if (word.length > 5 && chance(intensity * 0.03)) {
+                    totalChanges++;
+                    const idx = Math.floor(Math.random() * (word.length - 2)) + 1;
+                    // Swap two adjacent characters
+                    const arr = word.split('');
+                    [arr[idx], arr[idx + 1]] = [arr[idx + 1], arr[idx]];
+                    return arr.join('');
+                }
+                return word;
+            });
+            return result.join(' ');
+        }
+
+        function addPassiveVoice(text, intensity) {
+            if (!features.passive) return text;
+            // Simple passive voice conversions for common patterns
+            const patterns = [
+                { active: /\b(\w+)\s+(created|developed|built|designed|made)\s+(\w+)/gi, passive: '$3 was $2 by $1' },
+                { active: /\b(\w+)\s+(discovered|found|identified)\s+(\w+)/gi, passive: '$3 was $2 by $1' },
+            ];
+            patterns.forEach(({ active, passive }) => {
+                if (chance(intensity * 0.3)) {
+                    const before = text;
+                    text = text.replace(active, passive);
+                    if (text !== before) totalChanges++;
+                }
+            });
+            return text;
+        }
+
+        function varyPunctuation(text, intensity) {
+            // Occasionally replace periods with dashes or semicolons for human feel
+            const sentences = text.split(/(?<=[.!?])\s+/);
+            if (sentences.length < 3) return text;
+
+            const result = [];
+            for (let i = 0; i < sentences.length; i++) {
+                let s = sentences[i];
+                // Occasionally join two short sentences with a dash
+                if (i < sentences.length - 1 && chance(intensity * 0.1)) {
+                    const next = sentences[i + 1];
+                    if (s.length < 80 && next && next.length < 80) {
+                        totalChanges++;
+                        s = s.replace(/[.!?]$/, '') + ' -- ' + next.charAt(0).toLowerCase() + next.slice(1);
+                        i++; // skip next
+                    }
+                }
+                result.push(s);
+            }
+            return result.join(' ');
+        }
+
+        function cleanUpSpacing(text) {
+            return text
+                .replace(/\s{2,}/g, ' ')
+                .replace(/\s+([.,;:!?])/g, '$1')
+                .replace(/\.\s*\./g, '.')
+                .replace(/,\s*,/g, ',')
+                .trim();
+        }
+
+        // --- Estimate AI detection score (heuristic) ---
+        function estimateAIScore(text) {
+            if (!text.trim()) return '--';
+            let score = 50; // start neutral
+
+            // Check for AI-ism presence
+            for (const { pattern } of aiPhrases) {
+                if (pattern.test(text)) score += 5;
+                pattern.lastIndex = 0;
+            }
+
+            // Check for contractions (human-like)
+            const contractionCount = (text.match(/\b\w+'\w+/g) || []).length;
+            score -= contractionCount * 2;
+
+            // Check sentence length variance (humans have more variance)
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim());
+            if (sentences.length > 2) {
+                const lengths = sentences.map(s => s.trim().split(/\s+/).length);
+                const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+                const variance = lengths.reduce((sum, l) => sum + Math.pow(l - avg, 2), 0) / lengths.length;
+                const stdDev = Math.sqrt(variance);
+                if (stdDev > 8) score -= 15;
+                else if (stdDev > 5) score -= 10;
+                else if (stdDev < 3) score += 10;
+            }
+
+            // Check for filler words (human)
+            const fillerCount = (text.match(/\b(honestly|basically|actually|literally|pretty much|I mean|the thing is)\b/gi) || []).length;
+            score -= fillerCount * 3;
+
+            // Clamp
+            return Math.max(5, Math.min(95, score));
+        }
+
+        // --- Main humanize function ---
+        function humanize(text) {
+            if (!text.trim()) return '';
+            totalChanges = 0;
+
+            const multiplier = modeMultipliers[currentMode] || 0.6;
+            const baseIntensity = intensitySlider.value / 100;
+            const intensity = baseIntensity * multiplier;
+
+            let result = text;
+
+            // Pipeline order matters
+            result = removeAIPhrases(result, intensity);
+            result = applySynonymSwap(result, intensity);
+            result = applyContractions(result, intensity);
+            result = applyTransitions(result, intensity);
+            result = restructureSentences(result, intensity);
+            result = addFillerWords(result, intensity);
+            result = addPassiveVoice(result, intensity);
+            result = addMinorTypos(result, intensity);
+            result = varyPunctuation(result, intensity);
+            result = cleanUpSpacing(result);
+
+            return result;
+        }
+
+        // --- Simple diff display ---
+        function showDiff(original, modified) {
+            const origWords = original.split(/\s+/);
+            const modWords = modified.split(/\s+/);
+            let html = '';
+
+            // Simple word-level diff (not a full LCS, but good enough for display)
+            const maxLen = Math.max(origWords.length, modWords.length);
+            let oi = 0, mi = 0;
+            while (oi < origWords.length || mi < modWords.length) {
+                if (oi < origWords.length && mi < modWords.length) {
+                    if (origWords[oi] === modWords[mi]) {
+                        html += modWords[mi] + ' ';
+                        oi++; mi++;
+                    } else {
+                        html += '<span class="diff-removed">' + origWords[oi] + '</span> ';
+                        html += '<span class="diff-added">' + modWords[mi] + '</span> ';
+                        oi++; mi++;
+                    }
+                } else if (oi < origWords.length) {
+                    html += '<span class="diff-removed">' + origWords[oi] + '</span> ';
+                    oi++;
+                } else {
+                    html += '<span class="diff-added">' + modWords[mi] + '</span> ';
+                    mi++;
+                }
+            }
+
+            diffContent.innerHTML = '<div class="diff-line">' + html + '</div>';
+            diffPanel.classList.add('visible');
+        }
+
+        // --- History ---
+        function addToHistory(input, output) {
+            history.unshift({
+                input: input.substring(0, 200),
+                output: output.substring(0, 200),
+                mode: currentMode,
+                intensity: intensitySlider.value,
+                timestamp: new Date().toLocaleString(),
+            });
+            if (history.length > 20) history.pop();
+            localStorage.setItem('humanizer-history', JSON.stringify(history));
+        }
+
+        function renderHistory() {
+            historyList.innerHTML = history.map((item, i) => `
+                <div class="history-item" data-index="${i}">
+                    <div class="preview">${item.output}</div>
+                    <div class="meta">${item.mode} / ${item.intensity}% / ${item.timestamp}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- Update stats ---
+        function updateInputStats() {
+            const text = inputText.value;
+            inputChars.textContent = text.length + ' characters';
+            wordCount.textContent = countWords(text);
+            sentenceCount.textContent = countSentences(text);
+
+            const score = estimateAIScore(text);
+            aiScore.textContent = score === '--' ? '--' : score + '%';
+            aiScore.className = 'value';
+            if (score !== '--') {
+                if (score > 60) aiScore.classList.add('danger');
+                else if (score > 35) aiScore.classList.add('warning');
+                else aiScore.classList.add('success');
+            }
+        }
+
+        function updateOutputStats() {
+            outputChars.textContent = outputText.value.length + ' characters';
+        }
+
+        // --- Event Listeners ---
+
+        // Mode selector
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+            });
+        });
+
+        // Feature toggles
+        document.querySelectorAll('.toggle-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('active');
+                features[chip.dataset.feature] = chip.classList.contains('active');
+            });
+        });
+
+        // Intensity slider
+        intensitySlider.addEventListener('input', () => {
+            intensityValue.textContent = intensitySlider.value + '%';
+        });
+
+        // Input text stats
+        inputText.addEventListener('input', updateInputStats);
+
+        // Humanize button
+        humanizeBtn.addEventListener('click', () => {
+            const text = inputText.value.trim();
+            if (!text) { showToast('Paste some text first!'); return; }
+
+            humanizeBtn.classList.add('loading');
+            humanizeBtn.disabled = true;
+
+            // Simulate brief processing delay for UX
+            setTimeout(() => {
+                const result = humanize(text);
+                outputText.value = result;
+                copyBtn.disabled = false;
+
+                changeCount.textContent = totalChanges;
+                updateOutputStats();
+
+                // Update AI score for output
+                const newScore = estimateAIScore(result);
+                aiScore.textContent = newScore + '%';
+                aiScore.className = 'value';
+                if (newScore > 60) aiScore.classList.add('danger');
+                else if (newScore > 35) aiScore.classList.add('warning');
+                else aiScore.classList.add('success');
+
+                showDiff(text, result);
+                addToHistory(text, result);
+
+                humanizeBtn.classList.remove('loading');
+                humanizeBtn.disabled = false;
+
+                showToast('Text humanized with ' + totalChanges + ' changes!');
+            }, 400);
+        });
+
+        // Copy button
+        copyBtn.addEventListener('click', () => {
+            if (outputText.value) {
+                navigator.clipboard.writeText(outputText.value).then(() => {
+                    showToast('Copied to clipboard!');
+                }).catch(() => {
+                    outputText.select();
+                    document.execCommand('copy');
+                    showToast('Copied to clipboard!');
+                });
+            }
+        });
+
+        // Clear button
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+            copyBtn.disabled = true;
+            diffPanel.classList.remove('visible');
+            changeCount.textContent = '0';
+            updateInputStats();
+            updateOutputStats();
+        });
+
+        // History toggle
+        historyBtn.addEventListener('click', () => {
+            historyPanel.classList.toggle('visible');
+            if (historyPanel.classList.contains('visible')) renderHistory();
+        });
+
+        // History item click
+        historyList.addEventListener('click', (e) => {
+            const item = e.target.closest('.history-item');
+            if (item) {
+                const idx = parseInt(item.dataset.index);
+                outputText.value = history[idx].output;
+                updateOutputStats();
+                showToast('Loaded from history');
+            }
+        });
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                humanizeBtn.click();
+            }
+        });
+
+        // Init
+        updateInputStats();
+        updateOutputStats();
+    })();
+    </script>
+</body>
+</html>
