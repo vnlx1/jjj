@@ -638,6 +638,49 @@
         // --- DEEP STRUCTURAL TRANSFORMATION ---
         // This is the key to beating detectors. Instead of just swapping words,
         // we fundamentally rephrase how sentences are constructed.
+        // Convert a past participle (e.g. "created") to 3rd-person present ("creates").
+        // Returns null for forms it cannot safely conjugate (e.g. irregular -en participles).
+        function pastParticipleToPresent(verb) {
+            if (!verb.endsWith('ed')) return null; // skip -en and other irregular forms
+
+            // Handle -ied endings: "carried" -> "carries"
+            if (verb.endsWith('ied')) {
+                return verb.slice(0, -3) + 'ies';
+            }
+
+            const noED = verb.slice(0, -2); // strip "ed"
+            const noD  = verb.slice(0, -1); // strip "d" (always ends in 'e')
+
+            // Doubled final consonant: "stopped" -> "stop" -> "stops"
+            if (noED.length >= 2 && noED[noED.length - 1] === noED[noED.length - 2]
+                && !'aeiou'.includes(noED[noED.length - 1])) {
+                return noED.slice(0, -1) + 's';
+            }
+
+            // Sibilant endings need -es: "discussed" -> "discusses"
+            if (/(?:s|sh|ch|x|z)$/i.test(noED)) {
+                return noED + 'es';
+            }
+
+            // Two trailing consonants: base is noED.  "designed" -> "designs"
+            const last = noED[noED.length - 1] || '';
+            const prev = noED[noED.length - 2] || '';
+            const isVowel = c => 'aeiou'.includes(c.toLowerCase());
+            if (!isVowel(last) && !isVowel(prev)) {
+                return noED + 's';
+            }
+
+            // Stems ending in common word-final patterns: base is noED.
+            // "reviewed" -> "reviews", "delivered" -> "delivers", "employed" -> "employs"
+            if (/(?:ew|ow|er|or|op|oy|ay|ey|ar|ir|ur|ol|al|il|el)$/i.test(noED)) {
+                return noED + 's';
+            }
+
+            // Default: base likely ends in silent 'e', so strip just 'd' and add 's'.
+            // "created" -> "create" -> "creates", "managed" -> "manage" -> "manages"
+            return noD + 's';
+        }
+
         function deepRestructure(sentences, intensity) {
             if (!features['deep-restructure']) return sentences;
             const result = [];
@@ -661,10 +704,17 @@
 
                 // Convert passive "was Xed by Y" to active
                 if (!transformed && chance(intensity * 0.4)) {
-                    const passiveMatch = s.match(/(.+?)\s+(?:was|were|is|are|has been|have been)\s+(\w+(?:ed|en))\s+by\s+(.+?)([.!?])$/i);
+                    const passiveMatch = s.match(/(.+?)\s+(was|were|is|are|has been|have been)\s+(\w+(?:ed|en))\s+by\s+(.+?)([.!?])$/i);
                     if (passiveMatch) {
-                        const [, obj, verb, subj, punct] = passiveMatch;
-                        s = subj.trim().charAt(0).toUpperCase() + subj.trim().slice(1) + ' ' + verb + ' ' + obj.trim().toLowerCase() + punct;
+                        const [, obj, aux, verb, subj, punct] = passiveMatch;
+                        const auxLower = aux.toLowerCase();
+                        const isPresentTense = auxLower === 'is' || auxLower === 'are';
+                        let activeVerb = verb;
+                        if (isPresentTense) {
+                            const conjugated = pastParticipleToPresent(verb);
+                            if (conjugated) activeVerb = conjugated;
+                        }
+                        s = subj.trim().charAt(0).toUpperCase() + subj.trim().slice(1) + ' ' + activeVerb + ' ' + obj.trim().toLowerCase() + punct;
                         totalChanges++;
                         transformed = true;
                     }
