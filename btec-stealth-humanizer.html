@@ -38,512 +38,144 @@
                 radial-gradient(ellipse at 80% 20%, rgba(0, 100, 200, 0.03) 0%, transparent 50%);
         }
 
-        .container {
-            width: 100%;
-            max-width: 960px;
-        }
+        .container { width: 100%; max-width: 960px; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .header { text-align: center; margin-bottom: 30px; }
         .header h1 {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2rem; font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 8px;
         }
-
-        .header .subtitle {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-
+        .header .subtitle { color: var(--text-dim); font-size: 0.9rem; font-weight: 300; }
         .header .version-tag {
-            display: inline-block;
-            margin-top: 6px;
-            padding: 3px 10px;
-            background: var(--primary-dim);
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: var(--primary);
-            letter-spacing: 0.5px;
+            display: inline-block; margin-top: 6px; padding: 3px 10px;
+            background: var(--primary-dim); border: 1px solid var(--primary);
+            border-radius: 12px; font-size: 0.7rem; color: var(--primary); letter-spacing: 0.5px;
         }
 
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
+        .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
         .stat-card {
-            flex: 1;
-            min-width: 100px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 16px;
-            text-align: center;
+            flex: 1; min-width: 100px; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center;
         }
-
-        .stat-card .label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            margin-bottom: 4px;
-        }
-
-        .stat-card .value {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
+        .stat-card .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 4px; }
+        .stat-card .value { font-size: 1.2rem; font-weight: 600; color: var(--primary); }
         .stat-card .value.warning { color: var(--warning); }
         .stat-card .value.danger { color: var(--danger); }
         .stat-card .value.success { color: var(--success); }
 
-        /* Controls Panel */
         .controls-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 20px; margin-bottom: 20px;
         }
-
-        .controls-row {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .control-group {
-            flex: 1;
-            min-width: 180px;
-        }
-
+        .controls-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+        .control-group { flex: 1; min-width: 180px; }
         .control-group label {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            font-weight: 500;
+            display: block; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 8px; font-weight: 500;
         }
-
-        .mode-selector {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
+        .mode-selector { display: flex; gap: 6px; flex-wrap: wrap; }
         .mode-btn {
-            padding: 8px 14px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--text-dim);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-family: inherit;
-            transition: all 0.2s;
-            white-space: nowrap;
+            padding: 8px 14px; border: 1px solid var(--border); background: var(--bg);
+            color: var(--text-dim); border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+            font-family: inherit; transition: all 0.2s; white-space: nowrap;
         }
+        .mode-btn:hover { border-color: var(--primary); color: var(--text); }
+        .mode-btn.active { background: var(--primary-dim); color: var(--primary); border-color: var(--primary); }
 
-        .mode-btn:hover {
-            border-color: var(--primary);
-            color: var(--text);
-        }
-
-        .mode-btn.active {
-            background: var(--primary-dim);
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .slider-container { display: flex; align-items: center; gap: 12px; }
         input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            flex: 1;
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            outline: none;
+            -webkit-appearance: none; appearance: none; flex: 1; height: 6px;
+            background: var(--border); border-radius: 3px; outline: none;
         }
-
         input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            background: var(--primary);
-            border-radius: 50%;
-            cursor: pointer;
+            -webkit-appearance: none; appearance: none; width: 18px; height: 18px;
+            background: var(--primary); border-radius: 50%; cursor: pointer;
             box-shadow: 0 0 8px rgba(0, 212, 170, 0.4);
         }
+        .slider-value { font-size: 0.9rem; font-weight: 600; color: var(--primary); min-width: 36px; text-align: right; }
 
-        .slider-value {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--primary);
-            min-width: 36px;
-            text-align: right;
-        }
-
-        .toggles-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-
+        .toggles-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
         .toggle-chip {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            transition: all 0.2s;
-            user-select: none;
+            display: flex; align-items: center; gap: 6px; padding: 6px 12px;
+            background: var(--bg); border: 1px solid var(--border); border-radius: 20px;
+            cursor: pointer; font-size: 0.75rem; color: var(--text-dim);
+            transition: all 0.2s; user-select: none;
         }
-
         .toggle-chip:hover { border-color: var(--primary); color: var(--text); }
-
-        .toggle-chip.active {
-            background: var(--primary-dim);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .toggle-chip .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-            transition: background 0.2s;
-        }
-
+        .toggle-chip.active { background: var(--primary-dim); border-color: var(--primary); color: var(--primary); }
+        .toggle-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
         .toggle-chip.active .dot { background: var(--primary); }
 
-        /* Textarea */
-        .editor-section {
-            margin-bottom: 16px;
-        }
-
-        .editor-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .editor-label span {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .editor-label .char-count {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-        }
+        .editor-section { margin-bottom: 16px; }
+        .editor-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .editor-label span { font-size: 0.8rem; font-weight: 500; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+        .editor-label .char-count { font-size: 0.75rem; color: var(--text-dim); }
 
         textarea {
-            width: 100%;
-            min-height: 180px;
-            padding: 16px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            resize: vertical;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-family: inherit;
-            background-color: var(--surface);
-            color: var(--text);
+            width: 100%; min-height: 180px; padding: 16px; border: 1px solid var(--border);
+            border-radius: 10px; resize: vertical; font-size: 0.95rem; line-height: 1.7;
+            font-family: inherit; background-color: var(--surface); color: var(--text);
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-dim);
-        }
-
+        textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-dim); }
         textarea::placeholder { color: var(--text-dim); opacity: 0.6; }
         textarea[readonly] { cursor: default; }
 
-        /* Action Buttons */
-        .action-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
+        .action-row { display: flex; gap: 10px; margin-bottom: 16px; }
         .btn {
-            padding: 14px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            padding: 14px 24px; border: none; border-radius: 10px; font-size: 0.95rem;
+            font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.25s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-
-        .btn-primary {
-            flex: 1;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 4px 20px rgba(0, 212, 170, 0.35);
-            transform: translateY(-1px);
-        }
-
+        .btn-primary { flex: 1; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .btn-primary:hover { box-shadow: 0 4px 20px rgba(0, 212, 170, 0.35); transform: translateY(-1px); }
         .btn-primary:active { transform: translateY(0); }
+        .btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--surface-3); border-color: var(--text-dim); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
-        .btn-secondary {
-            background: var(--surface-2);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--surface-3);
-            border-color: var(--text-dim);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .spinner {
-            display: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
+        .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
         .btn.loading .spinner { display: inline-block; }
         .btn.loading .btn-text { display: none; }
 
-        /* Progress */
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: var(--border);
-            border-radius: 2px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            display: none;
-        }
-
+        .progress-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 16px; overflow: hidden; display: none; }
         .progress-bar.active { display: block; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 2px; transition: width 0.3s; width: 0%; }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-            transition: width 0.3s;
-            width: 0%;
-        }
-
-        /* Chunk display */
-        .chunk-info {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            display: none;
-        }
-
+        .chunk-info { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; display: none; }
         .chunk-info.visible { display: block; }
 
-        /* Diff View */
-        .diff-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
-            margin-top: 16px;
-            display: none;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
+        .diff-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; max-height: 300px; overflow-y: auto; }
         .diff-panel.visible { display: block; }
-
-        .diff-panel h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-        }
-
+        .diff-panel h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 12px; }
         .diff-line { font-size: 0.85rem; line-height: 1.8; font-family: 'Courier New', monospace; }
         .diff-added { color: var(--success); background: rgba(0, 221, 136, 0.08); padding: 0 4px; border-radius: 3px; }
         .diff-removed { color: var(--danger); background: rgba(255, 68, 102, 0.08); padding: 0 4px; border-radius: 3px; text-decoration: line-through; }
 
-        /* Analysis panel */
-        .analysis-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
-            margin-top: 16px;
-            display: none;
-        }
-
+        .analysis-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
         .analysis-panel.visible { display: block; }
-
-        .analysis-panel h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-        }
-
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-
-        .analysis-item {
-            background: var(--bg);
-            padding: 10px 14px;
-            border-radius: 8px;
-        }
-
-        .analysis-item .a-label {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .analysis-item .a-value {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-
+        .analysis-panel h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 12px; }
+        .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .analysis-item { background: var(--bg); padding: 10px 14px; border-radius: 8px; }
+        .analysis-item .a-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .analysis-item .a-value { font-size: 0.9rem; font-weight: 500; color: var(--text); }
         .analysis-item .a-value.good { color: var(--success); }
         .analysis-item .a-value.bad { color: var(--danger); }
         .analysis-item .a-value.ok { color: var(--warning); }
 
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--surface-2);
-            border: 1px solid var(--primary);
-            color: var(--text);
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 1000;
-            pointer-events: none;
-        }
+        .toast { position: fixed; bottom: 30px; right: 30px; background: var(--surface-2); border: 1px solid var(--primary); color: var(--text); padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 1000; pointer-events: none; }
+        .toast.show { opacity: 1; transform: translateY(0); }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* History Panel */
-        .history-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            display: none;
-        }
-
+        .history-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 20px; display: none; }
         .history-panel.visible { display: block; }
-
-        .history-panel h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-        }
-
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 12px;
-            background: var(--bg);
-            border-radius: 8px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
+        .history-panel h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 12px; }
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg); border-radius: 8px; margin-bottom: 6px; cursor: pointer; transition: background 0.2s; }
         .history-item:hover { background: var(--surface-2); }
-
-        .history-item .preview {
-            font-size: 0.82rem;
-            color: var(--text);
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            margin-right: 12px;
-        }
-
-        .history-item .meta {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            white-space: nowrap;
-        }
+        .history-item .preview { font-size: 0.82rem; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 12px; }
+        .history-item .meta { font-size: 0.7rem; color: var(--text-dim); white-space: nowrap; }
 
         @media (max-width: 600px) {
             .header h1 { font-size: 1.5rem; }
@@ -557,99 +189,71 @@
     <div class="container">
         <div class="header">
             <h1>BTEC Stealth Humanizer</h1>
-            <p class="subtitle">Multi-layer cognitive humanization engine with chunked semantic processing</p>
-            <span class="version-tag">v2.0 STEALTH</span>
+            <p class="subtitle">Deep structural humanization -- attacks perplexity, burstiness, and token probability patterns</p>
+            <span class="version-tag">v2.1 DEEP STEALTH</span>
         </div>
 
-        <!-- Stats Bar -->
         <div class="stats-bar">
-            <div class="stat-card">
-                <div class="label">Words</div>
-                <div class="value" id="word-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Sentences</div>
-                <div class="value" id="sentence-count">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">AI Risk</div>
-                <div class="value" id="ai-score">--</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Burstiness</div>
-                <div class="value" id="burst-score">--</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Changes</div>
-                <div class="value" id="change-count">0</div>
-            </div>
+            <div class="stat-card"><div class="label">Words</div><div class="value" id="word-count">0</div></div>
+            <div class="stat-card"><div class="label">Sentences</div><div class="value" id="sentence-count">0</div></div>
+            <div class="stat-card"><div class="label">AI Risk</div><div class="value" id="ai-score">--</div></div>
+            <div class="stat-card"><div class="label">Burstiness</div><div class="value" id="burst-score">--</div></div>
+            <div class="stat-card"><div class="label">Changes</div><div class="value" id="change-count">0</div></div>
         </div>
 
-        <!-- Controls -->
         <div class="controls-panel">
             <div class="controls-row">
                 <div class="control-group">
                     <label>Mode</label>
                     <div class="mode-selector">
                         <button class="mode-btn" data-mode="subtle">Subtle</button>
-                        <button class="mode-btn active" data-mode="balanced">Balanced</button>
+                        <button class="mode-btn" data-mode="balanced">Balanced</button>
                         <button class="mode-btn" data-mode="aggressive">Aggressive</button>
                         <button class="mode-btn" data-mode="academic">Academic</button>
-                        <button class="mode-btn" data-mode="stealth">Stealth Max</button>
+                        <button class="mode-btn active" data-mode="stealth">Stealth Max</button>
                     </div>
                 </div>
                 <div class="control-group">
                     <label>Intensity</label>
                     <div class="slider-container">
-                        <input type="range" id="intensity-slider" min="0" max="100" value="65">
-                        <span class="slider-value" id="intensity-value">65%</span>
+                        <input type="range" id="intensity-slider" min="0" max="100" value="80">
+                        <span class="slider-value" id="intensity-value">80%</span>
                     </div>
                 </div>
             </div>
             <div class="toggles-row">
-                <div class="toggle-chip active" data-feature="synonyms"><span class="dot"></span>Synonym Swap</div>
-                <div class="toggle-chip active" data-feature="structure"><span class="dot"></span>Restructure</div>
-                <div class="toggle-chip active" data-feature="filler"><span class="dot"></span>Discourse Markers</div>
-                <div class="toggle-chip active" data-feature="contractions"><span class="dot"></span>Contractions</div>
+                <div class="toggle-chip active" data-feature="deep-restructure"><span class="dot"></span>Deep Restructure</div>
+                <div class="toggle-chip active" data-feature="perplexity-boost"><span class="dot"></span>Perplexity Boost</div>
                 <div class="toggle-chip active" data-feature="burstiness"><span class="dot"></span>Burstiness</div>
-                <div class="toggle-chip active" data-feature="transitions"><span class="dot"></span>Transitions</div>
-                <div class="toggle-chip active" data-feature="remove-ai"><span class="dot"></span>Strip AI Patterns</div>
-                <div class="toggle-chip active" data-feature="semantic-drift"><span class="dot"></span>Semantic Drift</div>
-                <div class="toggle-chip active" data-feature="cognitive-load"><span class="dot"></span>Cognitive Load</div>
+                <div class="toggle-chip active" data-feature="human-voice"><span class="dot"></span>Human Voice</div>
+                <div class="toggle-chip active" data-feature="strip-ai"><span class="dot"></span>Strip AI Patterns</div>
+                <div class="toggle-chip active" data-feature="contractions"><span class="dot"></span>Contractions</div>
+                <div class="toggle-chip active" data-feature="cognitive-noise"><span class="dot"></span>Cognitive Noise</div>
+                <div class="toggle-chip active" data-feature="flow-break"><span class="dot"></span>Flow Breaking</div>
+                <div class="toggle-chip active" data-feature="vocab-shift"><span class="dot"></span>Vocabulary Shift</div>
                 <div class="toggle-chip" data-feature="typos"><span class="dot"></span>Minor Typos</div>
-                <div class="toggle-chip active" data-feature="paragraph-reform"><span class="dot"></span>Paragraph Reform</div>
-                <div class="toggle-chip active" data-feature="active-voice"><span class="dot"></span>Active Voice</div>
             </div>
         </div>
 
-        <!-- Input -->
         <div class="editor-section">
             <div class="editor-label">
                 <span>Input Text</span>
                 <span class="char-count" id="input-chars">0 characters</span>
             </div>
-            <textarea id="input-text" placeholder="Paste your AI-generated text here. The stealth engine will decompose it into semantic chunks and apply multi-layer cognitive humanization to produce output that reads like genuine human writing."></textarea>
+            <textarea id="input-text" placeholder="Paste AI-generated text here. The engine attacks the core statistical patterns that detectors measure: perplexity, burstiness, and structural predictability."></textarea>
         </div>
 
-        <!-- Progress -->
-        <div class="progress-bar" id="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
-        </div>
+        <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
         <div class="chunk-info" id="chunk-info"></div>
 
-        <!-- Action Buttons -->
         <div class="action-row">
-            <button class="btn btn-primary" id="humanize-btn">
-                <span class="btn-text">Humanize Text</span>
-                <span class="spinner"></span>
-            </button>
+            <button class="btn btn-primary" id="humanize-btn"><span class="btn-text">Humanize Text</span><span class="spinner"></span></button>
             <button class="btn btn-secondary" id="copy-btn" disabled>Copy</button>
             <button class="btn btn-secondary" id="clear-btn">Clear</button>
             <button class="btn btn-secondary" id="analyze-btn">Analyze</button>
             <button class="btn btn-secondary" id="history-btn">History</button>
         </div>
 
-        <!-- Output -->
         <div class="editor-section">
             <div class="editor-label">
                 <span>Humanized Output</span>
@@ -658,19 +262,16 @@
             <textarea id="output-text" readonly placeholder="Humanized text will appear here..."></textarea>
         </div>
 
-        <!-- Analysis Panel -->
         <div class="analysis-panel" id="analysis-panel">
             <h3>Detection Risk Analysis</h3>
             <div class="analysis-grid" id="analysis-grid"></div>
         </div>
 
-        <!-- Diff View -->
         <div class="diff-panel" id="diff-panel">
             <h3>Changes Made</h3>
             <div id="diff-content"></div>
         </div>
 
-        <!-- History Panel -->
         <div class="history-panel" id="history-panel">
             <h3>Recent Transformations</h3>
             <div id="history-list"></div>
@@ -683,324 +284,288 @@
     (function() {
         'use strict';
 
-        // =============================================
-        // DOM References
-        // =============================================
-        const inputText = document.getElementById('input-text');
-        const outputText = document.getElementById('output-text');
-        const humanizeBtn = document.getElementById('humanize-btn');
-        const copyBtn = document.getElementById('copy-btn');
-        const clearBtn = document.getElementById('clear-btn');
-        const analyzeBtn = document.getElementById('analyze-btn');
-        const historyBtn = document.getElementById('history-btn');
-        const intensitySlider = document.getElementById('intensity-slider');
-        const intensityValue = document.getElementById('intensity-value');
-        const inputChars = document.getElementById('input-chars');
-        const outputChars = document.getElementById('output-chars');
-        const wordCountEl = document.getElementById('word-count');
-        const sentenceCountEl = document.getElementById('sentence-count');
-        const aiScoreEl = document.getElementById('ai-score');
-        const burstScoreEl = document.getElementById('burst-score');
-        const changeCountEl = document.getElementById('change-count');
-        const diffPanel = document.getElementById('diff-panel');
-        const diffContent = document.getElementById('diff-content');
-        const historyPanel = document.getElementById('history-panel');
-        const historyList = document.getElementById('history-list');
-        const analysisPanel = document.getElementById('analysis-panel');
-        const analysisGrid = document.getElementById('analysis-grid');
-        const progressBar = document.getElementById('progress-bar');
-        const progressFill = document.getElementById('progress-fill');
-        const chunkInfo = document.getElementById('chunk-info');
-        const toast = document.getElementById('toast');
+        // ===== DOM =====
+        const $ = id => document.getElementById(id);
+        const inputText = $('input-text'), outputText = $('output-text');
+        const humanizeBtn = $('humanize-btn'), copyBtn = $('copy-btn');
+        const clearBtn = $('clear-btn'), analyzeBtn = $('analyze-btn'), historyBtn = $('history-btn');
+        const intensitySlider = $('intensity-slider'), intensityValue = $('intensity-value');
+        const inputChars = $('input-chars'), outputChars = $('output-chars');
+        const wordCountEl = $('word-count'), sentenceCountEl = $('sentence-count');
+        const aiScoreEl = $('ai-score'), burstScoreEl = $('burst-score'), changeCountEl = $('change-count');
+        const diffPanel = $('diff-panel'), diffContent = $('diff-content');
+        const historyPanel = $('history-panel'), historyList = $('history-list');
+        const analysisPanel = $('analysis-panel'), analysisGrid = $('analysis-grid');
+        const progressBar = $('progress-bar'), progressFill = $('progress-fill');
+        const chunkInfo = $('chunk-info'), toast = $('toast');
 
-        let currentMode = 'balanced';
+        let currentMode = 'stealth';
         let features = {
-            synonyms: true, structure: true, filler: true, contractions: true,
-            burstiness: true, transitions: true, 'remove-ai': true,
-            'semantic-drift': true, 'cognitive-load': true, typos: false,
-            'paragraph-reform': true, 'active-voice': true
+            'deep-restructure': true, 'perplexity-boost': true, burstiness: true,
+            'human-voice': true, 'strip-ai': true, contractions: true,
+            'cognitive-noise': true, 'flow-break': true, 'vocab-shift': true, typos: false
         };
         let history = JSON.parse(localStorage.getItem('humanizer-history-v2') || '[]');
         let totalChanges = 0;
 
-        // =============================================
-        // MASSIVE SYNONYM DICTIONARY
-        // Organized by register: formal -> casual
-        // =============================================
-        const synonymMap = {
-            // Overused AI words
-            'important': ['key', 'vital', 'essential', 'big', 'significant', 'meaningful', 'notable', 'critical', 'really matters'],
-            'furthermore': ['also', 'plus', 'on top of that', 'besides', 'and another thing'],
-            'consequently': ['so', 'as a result', 'because of this', 'which means', 'that led to'],
-            'however': ['but', 'though', 'still', 'yet', 'that said', 'on the flip side', 'then again'],
-            'therefore': ['so', 'which means', 'this is why', 'for this reason', 'because of that', 'and so'],
-            'additionally': ['also', 'plus', 'on top of that', 'and', 'not only that', 'besides that'],
-            'significant': ['major', 'big', 'notable', 'meaningful', 'considerable', 'real', 'noticeable'],
-            'utilize': ['use', 'work with', 'rely on', 'make use of', 'put to use'],
-            'implement': ['put in place', 'set up', 'roll out', 'carry out', 'apply', 'get going with'],
-            'demonstrate': ['show', 'prove', 'make clear', 'highlight', 'point out', 'reveal'],
-            'establish': ['set up', 'create', 'build', 'form', 'put together', 'start'],
-            'numerous': ['many', 'a lot of', 'plenty of', 'quite a few', 'several', 'tons of'],
-            'sufficient': ['enough', 'adequate', 'plenty', 'decent', 'good enough'],
-            'approximately': ['about', 'around', 'roughly', 'close to', 'nearly', 'more or less'],
-            'commence': ['start', 'begin', 'kick off', 'get going', 'get started'],
-            'terminate': ['end', 'stop', 'wrap up', 'finish', 'conclude', 'cut short'],
-            'facilitate': ['help', 'make easier', 'support', 'enable', 'assist with', 'speed up'],
-            'indicate': ['show', 'suggest', 'point to', 'hint at', 'signal', 'mean'],
-            'obtain': ['get', 'grab', 'pick up', 'acquire', 'secure', 'land'],
-            'regarding': ['about', 'when it comes to', 'on the topic of', 'as for', 'concerning'],
-            'comprehensive': ['thorough', 'complete', 'full', 'detailed', 'in-depth', 'wide-ranging'],
-            'subsequently': ['then', 'after that', 'next', 'later', 'following this', 'down the line'],
-            'primarily': ['mainly', 'mostly', 'for the most part', 'largely', 'above all'],
-            'nevertheless': ['still', 'even so', 'regardless', 'all the same', 'despite that'],
-            'fundamental': ['basic', 'core', 'key', 'essential', 'central', 'foundational'],
-            'substantial': ['big', 'large', 'considerable', 'major', 'decent-sized', 'hefty'],
-            'prevalent': ['common', 'widespread', 'frequent', 'typical', 'everywhere'],
-            'inherent': ['built-in', 'natural', 'core', 'innate', 'baked-in'],
-            'optimal': ['best', 'ideal', 'perfect', 'top', 'most effective'],
-            'adequate': ['enough', 'decent', 'sufficient', 'acceptable', 'fine'],
-            'endeavor': ['try', 'attempt', 'effort', 'push', 'go at'],
-            'paradigm': ['model', 'framework', 'approach', 'way of thinking', 'mindset'],
-            'methodology': ['method', 'approach', 'process', 'system', 'way of doing things'],
-            'multifaceted': ['complex', 'many-sided', 'varied', 'layered', 'complicated'],
-            'delve': ['dig into', 'explore', 'look into', 'examine', 'get into'],
-            'realm': ['area', 'field', 'domain', 'world', 'space', 'zone'],
-            'crucial': ['key', 'vital', 'essential', 'really important', 'critical'],
-            'moreover': ['also', 'plus', 'besides', 'and', 'on top of that'],
-            'pertaining': ['related to', 'about', 'regarding', 'connected to', 'tied to'],
-            'ascertain': ['find out', 'figure out', 'determine', 'work out', 'pin down'],
-            'plethora': ['a lot of', 'loads of', 'tons of', 'plenty of', 'a whole bunch of'],
-            'meticulous': ['careful', 'thorough', 'detailed', 'precise', 'exact'],
-            'elucidate': ['explain', 'clarify', 'make clear', 'spell out', 'break down'],
-            'necessitate': ['require', 'need', 'call for', 'demand', 'make necessary'],
-            'encompasses': ['includes', 'covers', 'involves', 'contains', 'takes in'],
-            'articulate': ['express', 'put into words', 'describe', 'convey', 'say'],
-            'underpinning': ['foundation', 'basis', 'backbone', 'core', 'base'],
-            'profound': ['deep', 'major', 'real', 'intense', 'serious', 'striking'],
-            'mitigate': ['reduce', 'lessen', 'ease', 'soften', 'cut down on'],
-            'exacerbate': ['worsen', 'make worse', 'aggravate', 'amplify', 'intensify'],
-            'proliferation': ['spread', 'growth', 'increase', 'explosion', 'rise'],
-            'juxtaposition': ['contrast', 'comparison', 'side by side', 'clash'],
-            'ameliorate': ['improve', 'make better', 'fix', 'help', 'enhance'],
-            'cognizant': ['aware', 'conscious', 'mindful', 'tuned in to'],
-            'delineate': ['outline', 'describe', 'lay out', 'sketch', 'map out'],
-            'perpetuate': ['keep going', 'continue', 'maintain', 'reinforce', 'prolong'],
-            'scrutinize': ['examine', 'look closely at', 'inspect', 'study', 'pick apart'],
-            'ubiquitous': ['everywhere', 'all over the place', 'omnipresent', 'inescapable'],
-            'dichotomy': ['split', 'divide', 'contrast', 'gap', 'two sides'],
-            'ramification': ['consequence', 'effect', 'result', 'outcome', 'fallout'],
-            'quintessential': ['classic', 'perfect example of', 'typical', 'definitive'],
-            'efficacy': ['effectiveness', 'success rate', 'how well it works', 'potency'],
-            'paradigmatic': ['typical', 'classic', 'model', 'standard'],
-            'concomitant': ['accompanying', 'related', 'connected', 'going along with'],
-            'salient': ['key', 'main', 'important', 'standout', 'notable'],
-            'precipitate': ['cause', 'trigger', 'bring about', 'spark', 'lead to'],
-            'encapsulate': ['capture', 'sum up', 'wrap up', 'contain', 'express'],
-            'disseminate': ['spread', 'share', 'distribute', 'pass around', 'get out there'],
-            'augment': ['boost', 'increase', 'add to', 'enhance', 'beef up'],
-            'underscore': ['highlight', 'emphasize', 'stress', 'drive home', 'make clear'],
-            'bolster': ['strengthen', 'support', 'boost', 'back up', 'reinforce'],
-            'catalyst': ['trigger', 'spark', 'driver', 'cause', 'push'],
-            'detrimental': ['harmful', 'damaging', 'bad', 'negative', 'hurtful'],
-            'propensity': ['tendency', 'inclination', 'habit', 'leaning', 'likelihood'],
-            'overarching': ['main', 'overall', 'broad', 'big-picture', 'sweeping'],
-            'nuanced': ['subtle', 'complex', 'layered', 'detailed', 'fine-grained'],
-            'intricate': ['complex', 'detailed', 'complicated', 'elaborate', 'involved'],
-            'endeavour': ['effort', 'attempt', 'try', 'venture', 'undertaking'],
-            'alleviate': ['ease', 'reduce', 'relieve', 'lighten', 'take the edge off'],
-            'encompasses': ['includes', 'covers', 'spans', 'takes in', 'wraps around'],
-            'myriad': ['countless', 'tons of', 'loads of', 'endless', 'a whole range of'],
+        // ===== UTILITIES =====
+        const pick = a => a[Math.floor(Math.random() * a.length)];
+        const chance = p => Math.random() < p;
+        const countWords = t => t.trim() ? t.trim().split(/\s+/).length : 0;
+        const countSentences = t => t.trim() ? t.split(/[.!?]+/).filter(s => s.trim()).length : 0;
+        const showToast = msg => { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); };
+        const modeMultipliers = { subtle: 0.35, balanced: 0.6, aggressive: 0.85, academic: 0.5, stealth: 1.0 };
+
+        // ===== MASSIVE VOCABULARY SHIFT MAP =====
+        // These target the specific high-probability tokens AI detectors flag.
+        // Each entry maps an "AI-typical" word/phrase to several "human-typical" alternatives
+        // that have LOWER token probability (higher perplexity = more human-like).
+        const vocabShift = {
+            // AI's favorite formal connectors
+            'furthermore': ['and honestly', 'plus', 'also', 'on top of all that', 'and get this'],
+            'moreover': ['and also', 'besides', 'oh and another thing', 'not to mention'],
+            'however': ['but', 'though', 'except', 'the thing is though', 'but honestly'],
+            'therefore': ['so basically', 'which is why', 'and that means', 'so yeah'],
+            'consequently': ['so what happened was', 'and because of that', 'which led to'],
+            'additionally': ['and also', 'plus', 'oh and', 'another thing worth saying'],
+            'nevertheless': ['but still', 'even with all that', 'regardless though', 'that said'],
+            'subsequently': ['and then', 'after that', 'what came next was', 'down the road'],
+            'conversely': ['but flip it around and', 'on the other side though', 'then again'],
+            'henceforth': ['from that point on', 'after that', 'going forward'],
+            'notwithstanding': ['even with that', 'despite all of it', 'setting that aside'],
+
+            // AI's favorite "smart" verbs
+            'utilize': ['use', 'work with', 'lean on', 'put to work'],
+            'implement': ['actually do', 'put into practice', 'get going with', 'make happen'],
+            'demonstrate': ['show', 'prove', 'make obvious', 'lay bare'],
+            'facilitate': ['help with', 'make smoother', 'grease the wheels for'],
+            'encompass': ['cover', 'wrap around', 'take in', 'stretch across'],
+            'elucidate': ['clear up', 'break down', 'shed light on', 'spell out plainly'],
+            'delineate': ['map out', 'sketch', 'draw the lines of', 'lay out clearly'],
+            'perpetuate': ['keep alive', 'drag on', 'feed into', 'keep the cycle going'],
+            'exacerbate': ['make things worse', 'pile onto', 'turn up the heat on', 'worsen'],
+            'ameliorate': ['make better', 'patch up', 'take the edge off', 'improve'],
+            'mitigate': ['soften the blow', 'dial back', 'cushion', 'ease up on'],
+            'scrutinize': ['pick apart', 'look hard at', 'go through with a fine comb'],
+            'disseminate': ['spread around', 'get the word out', 'pass along', 'share widely'],
+            'augment': ['beef up', 'add onto', 'bump up', 'pad out'],
+            'bolster': ['prop up', 'give a boost to', 'shore up', 'back up'],
+            'underscore': ['really drive home', 'hammer in', 'put a spotlight on'],
+            'articulate': ['put into words', 'say clearly', 'voice', 'spell out'],
+            'ascertain': ['figure out', 'nail down', 'get to the bottom of', 'pin down'],
+            'endeavor': ['try', 'take a crack at', 'give it a go', 'make an effort'],
+            'necessitate': ['force', 'make necessary', 'call for', 'require you to'],
+            'precipitate': ['kick off', 'set in motion', 'spark', 'bring on'],
+            'encapsulate': ['capture', 'boil down', 'wrap up neatly', 'sum up'],
+            'delve': ['dig', 'dive', 'get into the weeds of', 'explore'],
+            'navigate': ['deal with', 'find your way through', 'muddle through', 'work around'],
+            'foster': ['grow', 'build up', 'encourage', 'cultivate over time'],
+            'leverage': ['use', 'capitalize on', 'take advantage of', 'lean into'],
+
+            // AI's favorite adjectives/adverbs
+            'significant': ['big', 'real', 'noticeable', 'hard to ignore', 'substantial'],
+            'substantial': ['hefty', 'real', 'pretty big', 'sizable', 'not small'],
+            'comprehensive': ['thorough', 'wall-to-wall', 'pretty exhaustive', 'covering all the bases'],
+            'fundamental': ['at the root of it', 'bedrock-level', 'core', 'basic but critical'],
+            'crucial': ['make-or-break', 'essential', 'you really can not skip this', 'vital'],
+            'prevalent': ['everywhere you look', 'all over the place', 'super common', 'hard to miss'],
+            'inherent': ['baked right in', 'comes with the territory', 'built into the DNA of'],
+            'optimal': ['sweet spot', 'best-case', 'ideal', 'peak'],
+            'profound': ['deep', 'hit-you-in-the-gut', 'serious', 'earth-shaking'],
+            'robust': ['solid', 'tough', 'built to last', 'heavy-duty'],
+            'nuanced': ['layered', 'not black and white', 'complicated in the details'],
+            'intricate': ['tangled', 'complex', 'with a lot of moving parts'],
+            'multifaceted': ['many-angled', 'with lots of dimensions', 'not one-dimensional at all'],
+            'ubiquitous': ['literally everywhere', 'impossible to avoid', 'all around us'],
+            'salient': ['standout', 'front-and-center', 'impossible to miss', 'key'],
+            'pivotal': ['game-changing', 'turning-point', 'the hinge everything swung on'],
+            'overarching': ['big-picture', 'umbrella-level', 'the thread running through all of it'],
+            'detrimental': ['damaging', 'toxic', 'doing more harm than good', 'corrosive'],
+            'quintessential': ['the textbook example of', 'peak', 'the most on-the-nose version of'],
+            'meticulous': ['obsessively careful', 'leaving no stone unturned', 'painstaking'],
+            'seamless': ['buttery smooth', 'without any hiccups', 'like clockwork'],
+            'holistic': ['whole-picture', 'looking at everything together', 'not just one piece'],
+
+            // AI's favorite nouns
+            'paradigm': ['framework', 'way of seeing things', 'mental model', 'lens'],
+            'methodology': ['approach', 'game plan', 'how-to', 'process'],
+            'ramification': ['ripple effect', 'fallout', 'downstream consequence', 'aftershock'],
+            'dichotomy': ['split', 'fork in the road', 'tug of war between', 'tension'],
+            'efficacy': ['how well it actually works', 'track record', 'real-world performance'],
+            'proliferation': ['explosion', 'mushrooming', 'rapid spread', 'boom'],
+            'juxtaposition': ['side-by-side contrast', 'the clash between', 'putting X next to Y'],
+            'catalyst': ['spark', 'the thing that set it all off', 'trigger', 'tipping point'],
+            'propensity': ['tendency', 'lean toward', 'habit of', 'pull toward'],
+            'plethora': ['a ton of', 'more than enough', 'an overwhelming number of', 'heaps of'],
+            'myriad': ['endless', 'a dizzying number of', 'all sorts of', 'way too many'],
+            'realm': ['world', 'corner', 'space', 'arena'],
+            'landscape': ['picture', 'terrain', 'scene', 'lay of the land'],
+            'tapestry': ['patchwork', 'mosaic', 'weave', 'collage'],
+            'synergy': ['combined force', 'teamwork effect', 'the whole-is-greater thing'],
+            'underpinning': ['foundation', 'what holds it all up', 'bedrock', 'base layer'],
+            'endeavour': ['attempt', 'shot at', 'venture', 'go at it'],
+
+            // Approximate/filler
+            'approximately': ['roughly', 'something like', 'ballpark', 'give or take'],
+            'numerous': ['a bunch of', 'quite a few', 'plenty of', 'more than a handful of'],
+            'sufficient': ['enough', 'good enough', 'adequate', 'it will do'],
+            'adequate': ['passable', 'good enough', 'it gets the job done', 'decent'],
         };
 
-        // =============================================
-        // AI PHRASE PATTERNS (expanded)
-        // =============================================
+        // ===== AI PHRASE PATTERNS =====
         const aiPhrases = [
-            { pattern: /\bIt is important to note that\b/gi, replacements: ['Worth mentioning,', 'One thing to keep in mind:', 'Something to point out here:'] },
-            { pattern: /\bIt is worth noting that\b/gi, replacements: ['Interestingly,', 'On that note,', 'Here is the thing:'] },
-            { pattern: /\bIn conclusion\b/gi, replacements: ['All in all', 'To wrap things up', 'So overall', 'At the end of the day', 'Looking at the bigger picture'] },
-            { pattern: /\bIn summary\b/gi, replacements: ['To sum it up', 'Basically', 'Long story short', 'Bottom line', 'When you boil it down'] },
-            { pattern: /\bdelve into\b/gi, replacements: ['look into', 'dig into', 'explore', 'get into', 'unpack'] },
-            { pattern: /\bin the realm of\b/gi, replacements: ['in the world of', 'when it comes to', 'in the field of', 'in', 'across'] },
-            { pattern: /\bIt('|')s important to\b/gi, replacements: ['You should', 'We need to', 'It helps to', 'Make sure to', 'You really want to'] },
-            { pattern: /\bplays a (crucial|vital|pivotal|key|significant|important) role\b/gi, replacements: ['matters a lot', 'is really important', 'makes a big difference', 'is a big deal', 'carries real weight'] },
-            { pattern: /\bThis (essay|article|paper|text|piece) (will )?(explore|examine|discuss|analyze|investigate)\b/gi, replacements: ["I'm going to talk about", "Let's look at", "Here we'll cover", 'I want to go over', 'What follows is a look at'] },
-            { pattern: /\bin today('|')s (world|society|age|era|landscape|climate)\b/gi, replacements: ['these days', 'right now', 'nowadays', 'currently', 'in the current moment'] },
-            { pattern: /\ba myriad of\b/gi, replacements: ['lots of', 'many', 'a bunch of', 'all kinds of', 'tons of'] },
-            { pattern: /\bfoster(s|ing)?\b/gi, replacements: ['build', 'encourage', 'support', 'grow', 'nurture'] },
-            { pattern: /\bnavigate\b/gi, replacements: ['deal with', 'handle', 'work through', 'manage', 'figure out'] },
-            { pattern: /\blandscape\b/gi, replacements: ['scene', 'situation', 'environment', 'space', 'picture'] },
-            { pattern: /\beverchanging\b/gi, replacements: ['always changing', 'constantly shifting', 'never static'] },
-            { pattern: /\bever-evolving\b/gi, replacements: ['constantly changing', 'always shifting', 'never standing still'] },
-            { pattern: /\btapestry\b/gi, replacements: ['mix', 'collection', 'blend', 'patchwork'] },
-            { pattern: /\bpivotal\b/gi, replacements: ['key', 'major', 'turning-point', 'critical', 'decisive'] },
-            { pattern: /\bundeniably\b/gi, replacements: ['clearly', 'obviously', 'without question', 'no doubt'] },
-            { pattern: /\brobust\b/gi, replacements: ['strong', 'solid', 'reliable', 'powerful', 'sturdy'] },
-            { pattern: /\bseamless(ly)?\b/gi, replacements: ['smooth', 'easy', 'effortless', 'without a hitch'] },
-            { pattern: /\bholistic\b/gi, replacements: ['overall', 'complete', 'full', 'well-rounded', 'whole-picture'] },
-            { pattern: /\bsynergy\b/gi, replacements: ['collaboration', 'teamwork', 'combined effort', 'working together'] },
-            { pattern: /\bleverag(e|es|ing)\b/gi, replacements: ['use', 'take advantage of', 'make use of', 'tap into'] },
-            { pattern: /\bAt its core\b/gi, replacements: ['Really', 'Fundamentally', 'When you get down to it', 'Stripped down'] },
-            { pattern: /\bIn essence\b/gi, replacements: ['Basically', 'Really', 'Put simply', 'At heart'] },
-            { pattern: /\bIt goes without saying\b/gi, replacements: ['Obviously', 'Of course', 'Clearly', 'Needless to say'] },
-            { pattern: /\bMoving forward\b/gi, replacements: ['Going ahead', 'From here', 'Next', 'Looking ahead'] },
-            { pattern: /\bThat being said\b/gi, replacements: ['That said', 'Still', 'Even so', 'With that in mind'] },
-            { pattern: /\bIn order to\b/gi, replacements: ['To', 'So we can', 'If you want to', 'For'] },
-            { pattern: /\bDue to the fact that\b/gi, replacements: ['Because', 'Since', 'Given that', 'Seeing as'] },
-            { pattern: /\bIt can be argued that\b/gi, replacements: ['Some would say', 'You could argue', 'There is a case that', 'Arguably'] },
-            { pattern: /\bIt is evident that\b/gi, replacements: ['Clearly', 'Obviously', 'You can see that', 'It is clear'] },
-            { pattern: /\bIn light of\b/gi, replacements: ['Given', 'Because of', 'Considering', 'With'] },
-            { pattern: /\bNonetheless\b/gi, replacements: ['Still', 'Even so', 'But', 'Despite that', 'All the same'] },
-            { pattern: /\bHenceforth\b/gi, replacements: ['From now on', 'Going forward', 'After this', 'Starting now'] },
-            { pattern: /\bIntrinsically\b/gi, replacements: ['Naturally', 'By nature', 'At its core', 'Deep down'] },
-            { pattern: /\bConversely\b/gi, replacements: ['On the other hand', 'Flip side', 'But then', 'Alternatively'] },
-            { pattern: /\bIn a nutshell\b/gi, replacements: ['Simply put', 'Basically', 'To put it briefly', 'Short version'] },
-            { pattern: /\bWhile it is true that\b/gi, replacements: ['Sure,', 'Yes,', 'Granted,', 'Admittedly,'] },
-            { pattern: /\bAs previously mentioned\b/gi, replacements: ['Like I said', 'As I touched on', 'Going back to', 'As noted'] },
-            { pattern: /\bThis is particularly (important|relevant|significant|notable)\b/gi, replacements: ['This really matters', 'This stands out', 'Pay attention to this', 'This one is big'] },
-            // Detect the "Firstly...Secondly...Thirdly" pattern
-            { pattern: /\bFirstly\b/gi, replacements: ['First off', 'To start', 'For one thing', 'Starting out'] },
-            { pattern: /\bSecondly\b/gi, replacements: ['Then', 'Next up', 'Another thing', 'On top of that'] },
-            { pattern: /\bThirdly\b/gi, replacements: ['Also', 'And then', 'Beyond that', 'Third'] },
-            { pattern: /\bLastly\b/gi, replacements: ['Finally', 'And last', 'To wrap it up', 'One more thing'] },
+            { p: /\bIt is important to note that\b/gi, r: ['One thing worth flagging:', 'Something people overlook:', 'Here is a detail that matters:'] },
+            { p: /\bIt is worth noting that\b/gi, r: ['Interestingly enough,', 'And here is the kicker:', 'Pay attention to this:'] },
+            { p: /\bIn conclusion\b/gi, r: ['So when you step back and look at all of this', 'Pulling it all together', 'At the end of the day', 'After everything'] },
+            { p: /\bIn summary\b/gi, r: ['If I had to boil it down', 'The short version', 'Stripped to the essentials', 'Bottom line here'] },
+            { p: /\bdelve into\b/gi, r: ['dig into', 'get into', 'unpack', 'poke around in'] },
+            { p: /\bin the realm of\b/gi, r: ['when we talk about', 'in', 'across', 'inside the world of'] },
+            { p: /\bIt('|')s important to\b/gi, r: ['You want to', 'The smart move is to', 'It really helps to', 'Do not skip'] },
+            { p: /\bplays a (?:crucial|vital|pivotal|key|significant|important) role\b/gi, r: ['is a big deal', 'carries serious weight', 'matters more than people think', 'you can not ignore'] },
+            { p: /\bThis (?:essay|article|paper|text|piece) (?:will )?(?:explore|examine|discuss|analyze|investigate)\b/gi, r: ['What I want to get into here is', 'The focus here is on', 'Let me walk through', 'I am going to break down'] },
+            { p: /\bin today('|')s (?:world|society|age|era|landscape|climate)\b/gi, r: ['right now', 'these days', 'the way things are now', 'as things stand'] },
+            { p: /\ba myriad of\b/gi, r: ['way too many', 'a wild number of', 'all kinds of', 'a flood of'] },
+            { p: /\beverchanging\b/gi, r: ['always in flux', 'never sitting still', 'constantly moving'] },
+            { p: /\bever-evolving\b/gi, r: ['always morphing', 'never the same twice', 'perpetually shifting'] },
+            { p: /\bundeniably\b/gi, r: ['no question', 'flat out', 'there is zero debate that', 'hands down'] },
+            { p: /\bAt its core\b/gi, r: ['Strip away the noise and', 'What it really comes down to is', 'Deep down'] },
+            { p: /\bIn essence\b/gi, r: ['Boiled down', 'At heart', 'When you get past the surface'] },
+            { p: /\bIt goes without saying\b/gi, r: ['This should be obvious but', 'I probably do not need to say this but', 'Look'] },
+            { p: /\bMoving forward\b/gi, r: ['From here', 'Next step', 'Going ahead', 'What comes after'] },
+            { p: /\bThat being said\b/gi, r: ['That said', 'Still though', 'With that hanging in the air', 'Even so'] },
+            { p: /\bIn order to\b/gi, r: ['To', 'If you want to', 'For', 'So that you can'] },
+            { p: /\bDue to the fact that\b/gi, r: ['Because', 'Since', 'The reason is', 'Seeing as how'] },
+            { p: /\bIt can be argued that\b/gi, r: ['You could make the case that', 'There is an argument for', 'Some people think'] },
+            { p: /\bIt is evident that\b/gi, r: ['You can clearly see', 'It is pretty obvious', 'The evidence points to'] },
+            { p: /\bIn light of\b/gi, r: ['Given', 'After looking at', 'With', 'Factoring in'] },
+            { p: /\bWhile it is true that\b/gi, r: ['Sure', 'Granted', 'Yes', 'Okay fine'] },
+            { p: /\bAs previously mentioned\b/gi, r: ['Like I said earlier', 'Going back to that point', 'As I touched on'] },
+            { p: /\bThis is particularly (?:important|relevant|significant|notable)\b/gi, r: ['This part really matters', 'Do not gloss over this', 'Pay close attention here', 'This is the crux of it'] },
+            { p: /\bFirstly\b/gi, r: ['First off', 'Starting with this', 'Number one', 'Okay so first'] },
+            { p: /\bSecondly\b/gi, r: ['Then there is', 'Next up', 'And then', 'On top of that'] },
+            { p: /\bThirdly\b/gi, r: ['Beyond that', 'And another thing', 'Pile on this too', 'Add to that'] },
+            { p: /\bLastly\b/gi, r: ['And finally', 'To cap it off', 'One more thing', 'Last piece of the puzzle'] },
+            { p: /\bIn today's digital age\b/gi, r: ['With tech being what it is now', 'The way the internet has taken over', 'Given how digital everything is'] },
+            { p: /\bhas become increasingly\b/gi, r: ['keeps getting more', 'is turning more and more', 'has been sliding toward being more'] },
+            { p: /\bhas garnered significant attention\b/gi, r: ['has gotten a lot of buzz', 'people are really paying attention to', 'has been on everyone is radar'] },
+            { p: /\bserves as a testament to\b/gi, r: ['is proof of', 'shows you just how much', 'speaks volumes about'] },
+            { p: /\bIt is imperative that\b/gi, r: ['You absolutely have to', 'There is no getting around it --', 'It is non-negotiable that'] },
+            { p: /\bthe intricacies of\b/gi, r: ['the messy details of', 'the tangled web of', 'all the little moving pieces in'] },
         ];
 
-        // =============================================
-        // CONTRACTION MAP
-        // =============================================
-        const contractionMap = {
+        // ===== CONTRACTION MAP =====
+        const contrMap = {
             'I am': "I'm", 'I have': "I've", 'I will': "I'll", 'I would': "I'd",
             'you are': "you're", 'you have': "you've", 'you will': "you'll", 'you would': "you'd",
             'he is': "he's", 'she is': "she's", 'it is': "it's", 'it has': "it's",
             'we are': "we're", 'we have': "we've", 'we will': "we'll", 'we would': "we'd",
             'they are': "they're", 'they have': "they've", 'they will': "they'll", 'they would': "they'd",
-            'that is': "that's", 'that has': "that's",
-            'who is': "who's", 'who has': "who's",
-            'what is': "what's", 'what has': "what's",
-            'where is': "where's", 'where has': "where's",
-            'there is': "there's", 'there has': "there's",
-            'here is': "here's",
+            'that is': "that's", 'who is': "who's", 'what is': "what's", 'where is': "where's",
+            'there is': "there's", 'here is': "here's",
             'do not': "don't", 'does not': "doesn't", 'did not': "didn't",
             'is not': "isn't", 'are not': "aren't", 'was not': "wasn't", 'were not': "weren't",
             'has not': "hasn't", 'have not': "haven't", 'had not': "hadn't",
             'will not': "won't", 'would not': "wouldn't",
             'can not': "can't", 'cannot': "can't", 'could not': "couldn't",
-            'should not': "shouldn't", 'shall not': "shan't",
-            'might not': "mightn't", 'must not': "mustn't",
-            'let us': "let's", 'need not': "needn't",
+            'should not': "shouldn't", 'let us': "let's",
         };
 
-        // =============================================
-        // DISCOURSE MARKERS (human filler / cognitive markers)
-        // =============================================
-        const discourseMarkers = {
-            opening: [
-                'Look,', 'Honestly,', 'The thing is,', 'Here is the deal:', 'Okay so,',
-                'Alright,', 'Listen,', 'So here is what I think:', 'Real talk,',
-            ],
-            hedging: [
-                'I think', 'probably', 'it seems like', 'maybe', 'as far as I can tell',
-                'from what I gather', 'if I had to guess', 'in a way', 'sort of', 'kind of',
-                'more or less', 'give or take', 'ballpark',
-            ],
-            emphasis: [
-                'really', 'actually', 'seriously', 'genuinely', 'truly', 'honestly',
-                'no joke', 'for real', 'legitimately',
-            ],
-            transition: [
-                'Anyway,', 'So,', 'Now,', 'Moving on,', 'But here is the thing,',
-                'On a related note,', 'Speaking of which,', 'That brings me to,',
-                'And then,', 'Right, so,',
-            ],
-            parenthetical: [
-                'which is interesting', 'if you think about it', 'at least in my view',
-                'to some extent', 'in practice', 'from a practical standpoint',
-                'when it really comes down to it', 'for better or worse',
-            ],
-        };
-
-        // =============================================
-        // TRANSITION VARIATIONS
-        // =============================================
-        const transitionMap = {
-            'First,': ['First off,', 'To start,', 'For starters,', 'Right out of the gate,'],
-            'Second,': ['Next,', 'Then,', 'Moving on,', 'After that,', 'From there,'],
-            'Third,': ['On top of that,', 'Another thing is,', 'Also,', 'And then,'],
-            'Finally,': ['Last but not least,', 'And lastly,', 'To finish off,', 'And to close it out,'],
-            'For example,': ['Like,', 'For instance,', 'Take this:', 'Say,', 'To give you an idea,'],
-            'In addition,': ['Also,', 'Plus,', 'On top of that,', 'And,', 'Not to mention,'],
-            'On the other hand,': ['But then again,', 'At the same time,', 'Then again,', 'Flip side though,'],
-            'As a result,': ['So,', 'Because of this,', 'Which means,', 'And that led to,'],
-        };
-
-        // =============================================
-        // SENTENCE RESTRUCTURING PATTERNS
-        // =============================================
-        const sentenceStarters = [
-            'The thing is, ', 'What stands out here is that ', 'When you look at it closely, ',
-            'From what I can see, ', 'In my experience, ', 'Honestly, ',
-            'Something worth pointing out: ', 'One thing that stands out is ',
-            'If you really look at it, ', 'Here is what gets me: ',
-            'What people tend to miss is that ', 'The part that really matters is ',
+        // ===== DEEP SENTENCE REPHRASING PATTERNS =====
+        // These are structural transformations, not just word swaps.
+        // They change HOW things are said, not just WHICH words are used.
+        const sentenceTransforms = [
+            // "X is Y" -> "Y -- that is what X is" or "When you look at X, it is basically Y"
+            { detect: /^(\w[\w\s]{5,30}) is ([\w\s]{10,50})\./i, transform: (m, subj, pred) => {
+                return chance(0.5)
+                    ? pred.trim().charAt(0).toUpperCase() + pred.trim().slice(1) + ' -- that is basically what ' + subj.trim().toLowerCase() + ' comes down to.'
+                    : 'When you look at ' + subj.trim().toLowerCase() + ', it is basically ' + pred.trim() + '.';
+            }},
+            // "There are many X that Y" -> "You will find no shortage of X that Y" or "X that Y? There are tons"
+            { detect: /^There are (many|numerous|several|various) ([\w\s]+) that/i, transform: (m, quant, noun) => {
+                return pick([
+                    'You will find no shortage of ' + noun.trim() + ' that',
+                    noun.trim().charAt(0).toUpperCase() + noun.trim().slice(1) + ' that',
+                    'Plenty of ' + noun.trim() + ' out there that',
+                ]);
+            }},
+            // "It is clear that X" -> "X -- and it is not even subtle"
+            { detect: /^It is (?:clear|evident|obvious|apparent) that ([\w\s,]+)/i, transform: (m, rest) => {
+                return pick([
+                    rest.trim().charAt(0).toUpperCase() + rest.trim().slice(1) + ' -- and it is not even subtle.',
+                    'Look, ' + rest.trim() + '. That much is clear.',
+                    rest.trim().charAt(0).toUpperCase() + rest.trim().slice(1) + ', plain and simple.',
+                ]);
+            }},
         ];
 
-        // =============================================
-        // MODE MULTIPLIERS
-        // =============================================
-        const modeMultipliers = {
-            subtle: 0.3,
-            balanced: 0.6,
-            aggressive: 0.85,
-            academic: 0.45,
-            stealth: 1.0,
+        // ===== HUMAN VOICE INJECTIONS =====
+        // These add the kind of thing a real person writing an essay at 2am would say.
+        const humanVoiceInserts = {
+            // Self-corrections that increase perplexity
+            corrections: [
+                'well, not exactly -- but close enough.',
+                'or maybe that is the wrong way to put it.',
+                'actually, let me rephrase that.',
+                'okay that came out wrong. What I mean is',
+                'wait, no -- it is more like',
+            ],
+            // Asides and digressions
+            asides: [
+                '(which, if you think about it, is kind of wild)',
+                '(and honestly that surprised me too)',
+                '(bear with me here)',
+                '-- and this part is important --',
+                '-- stay with me on this --',
+                ', which is a whole other conversation,',
+                ', and I realize that sounds dramatic but hear me out,',
+            ],
+            // Rhetorical bridges that break predictability
+            bridges: [
+                'But here is where it gets interesting.',
+                'Now you might be thinking -- so what?',
+                'Hang on though. There is a catch.',
+                'And this is the part most people miss.',
+                'Which brings up a good question.',
+                'Okay so why does any of this matter?',
+                'Let me put it differently.',
+                'Think of it this way.',
+            ],
+            // Sentence openers that break the "topic sentence" pattern
+            openers: [
+                'The weird thing is,', 'What gets overlooked is', 'Nobody really talks about this, but',
+                'Here is something that bugs me:', 'Funny enough,', 'Counterintuitively,',
+                'Not everyone agrees, but', 'This might sound strange but', 'Look at it from another angle:',
+                'I keep coming back to this:', 'The uncomfortable truth is', 'People tend to miss this:',
+                'Strip away the jargon and', 'Call me biased but', 'Whether you like it or not,',
+            ],
+            // Paragraph connectors that feel like a person thinking
+            paraConnectors: [
+                'So where does that leave us?',
+                'Alright. Moving on.',
+                'Now here is where things shift.',
+                'Okay, different angle.',
+                'Let me zoom out for a second.',
+                'Before I go further --',
+                'Quick tangent.',
+                'Back to the main thread.',
+            ],
         };
 
         // =============================================
-        // UTILITY FUNCTIONS
-        // =============================================
-        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-        function chance(p) { return Math.random() < p; }
-        function countWords(t) { return t.trim() ? t.trim().split(/\s+/).length : 0; }
-        function countSentences(t) { return t.trim() ? t.split(/[.!?]+/).filter(s => s.trim()).length : 0; }
-
-        function showToast(msg) {
-            toast.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        function shuffleArray(arr) {
-            const a = [...arr];
-            for (let i = a.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [a[i], a[j]] = [a[j], a[i]];
-            }
-            return a;
-        }
-
-        // =============================================
-        // PHASE 1: CHUNKED DECONSTRUCTION
-        // Split text into semantic chunks (paragraphs, then
-        // groups of 2-4 sentences for sub-processing)
+        // PHASE 1: DECOMPOSE INTO CHUNKS
         // =============================================
         function decomposeIntoChunks(text) {
-            // Split by paragraph
             const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
             const chunks = [];
-
             for (const para of paragraphs) {
-                // Split paragraph into sentences
-                const sentences = para.split(/(?<=[.!?])\s+/).filter(s => s.trim());
-
+                const sentences = splitSentences(para);
                 if (sentences.length <= 3) {
-                    // Small paragraph = single chunk
-                    chunks.push({ sentences, type: 'paragraph' });
+                    chunks.push({ sentences, isNewPara: true });
                 } else {
-                    // Break into sub-chunks of 2-4 sentences
                     let i = 0;
                     while (i < sentences.length) {
                         const size = Math.min(2 + Math.floor(Math.random() * 3), sentences.length - i);
-                        chunks.push({ sentences: sentences.slice(i, i + size), type: 'subchunk' });
+                        chunks.push({ sentences: sentences.slice(i, i + size), isNewPara: i === 0 });
                         i += size;
                     }
                 }
@@ -1008,23 +573,28 @@
             return chunks;
         }
 
+        function splitSentences(text) {
+            // Better sentence splitter that handles abbreviations etc.
+            const raw = text.match(/[^.!?]+[.!?]+[\s]*/g) || [text];
+            return raw.map(s => s.trim()).filter(s => s.length > 0);
+        }
+
         // =============================================
-        // PHASE 2: COGNITIVE HUMANIZATION PIPELINE
-        // Each function operates on text and returns modified text
+        // PHASE 2: TRANSFORMATION PIPELINE
         // =============================================
 
-        // --- Strip AI patterns ---
-        function removeAIPhrases(text, intensity) {
-            if (!features['remove-ai']) return text;
-            for (const { pattern, replacements } of aiPhrases) {
-                text = text.replace(pattern, (match) => {
-                    if (chance(Math.max(intensity, 0.5))) {
+        // --- STRIP AI PATTERNS ---
+        function stripAI(text, intensity) {
+            if (!features['strip-ai']) return text;
+            for (const { p, r } of aiPhrases) {
+                text = text.replace(p, (match) => {
+                    if (chance(Math.max(intensity, 0.55))) {
                         totalChanges++;
-                        let r = pick(replacements);
-                        if (match[0] === match[0].toUpperCase() && r[0] !== r[0].toUpperCase()) {
-                            r = r.charAt(0).toUpperCase() + r.slice(1);
+                        let rep = pick(r);
+                        if (match[0] === match[0].toUpperCase() && rep[0] !== rep[0].toUpperCase()) {
+                            rep = rep.charAt(0).toUpperCase() + rep.slice(1);
                         }
-                        return r;
+                        return rep;
                     }
                     return match;
                 });
@@ -1032,48 +602,19 @@
             return text;
         }
 
-        // --- Synonym swap with context awareness ---
-        function applySynonymSwap(text, intensity) {
-            if (!features.synonyms) return text;
-            for (const [word, syns] of Object.entries(synonymMap)) {
-                const regex = new RegExp('\\b' + word + '\\b', 'gi');
-                text = text.replace(regex, (match) => {
-                    if (chance(intensity * 0.65)) {
-                        totalChanges++;
-                        let replacement = pick(syns);
-                        if (match[0] === match[0].toUpperCase()) {
-                            replacement = replacement.charAt(0).toUpperCase() + replacement.slice(1);
-                        }
-                        return replacement;
-                    }
-                    return match;
-                });
-            }
-            return text;
-        }
-
-        // --- Contractions ---
-        function applyContractions(text, intensity) {
-            if (!features.contractions) return text;
-            for (const [full, contracted] of Object.entries(contractionMap)) {
-                const regex = new RegExp('\\b' + full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
-                text = text.replace(regex, (match) => {
-                    if (chance(intensity * 0.85)) { totalChanges++; return contracted; }
-                    return match;
-                });
-            }
-            return text;
-        }
-
-        // --- Transition variation ---
-        function applyTransitions(text, intensity) {
-            if (!features.transitions) return text;
-            for (const [original, alternatives] of Object.entries(transitionMap)) {
-                const regex = new RegExp('\\b' + original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        // --- VOCABULARY SHIFT ---
+        function shiftVocab(text, intensity) {
+            if (!features['vocab-shift']) return text;
+            for (const [word, alts] of Object.entries(vocabShift)) {
+                const regex = new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
                 text = text.replace(regex, (match) => {
                     if (chance(intensity * 0.7)) {
                         totalChanges++;
-                        return pick(alternatives);
+                        let rep = pick(alts);
+                        if (match[0] === match[0].toUpperCase() && rep[0] !== rep[0].toUpperCase()) {
+                            rep = rep.charAt(0).toUpperCase() + rep.slice(1);
+                        }
+                        return rep;
                     }
                     return match;
                 });
@@ -1081,384 +622,478 @@
             return text;
         }
 
-        // --- BURSTINESS INJECTION ---
-        // The key signal AI detectors look for is uniform sentence length.
-        // Humans write with extreme variation: some sentences are 3 words,
-        // others are 40+. This function deliberately breaks uniform rhythm.
-        function injectBurstiness(sentences, intensity) {
-            if (!features.burstiness) return sentences;
+        // --- CONTRACTIONS ---
+        function applyContractions(text, intensity) {
+            if (!features.contractions) return text;
+            for (const [full, short] of Object.entries(contrMap)) {
+                const regex = new RegExp('\\b' + full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                text = text.replace(regex, (match) => {
+                    if (chance(intensity * 0.9)) { totalChanges++; return short; }
+                    return match;
+                });
+            }
+            return text;
+        }
+
+        // --- DEEP STRUCTURAL TRANSFORMATION ---
+        // This is the key to beating detectors. Instead of just swapping words,
+        // we fundamentally rephrase how sentences are constructed.
+        function deepRestructure(sentences, intensity) {
+            if (!features['deep-restructure']) return sentences;
+            const result = [];
+
+            for (let i = 0; i < sentences.length; i++) {
+                let s = sentences[i].trim();
+
+                // Try structural transforms
+                let transformed = false;
+                if (chance(intensity * 0.3)) {
+                    for (const { detect, transform } of sentenceTransforms) {
+                        const match = s.match(detect);
+                        if (match) {
+                            s = transform(...match);
+                            totalChanges++;
+                            transformed = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Convert passive "was Xed by Y" to active
+                if (!transformed && chance(intensity * 0.4)) {
+                    const passiveMatch = s.match(/(.+?)\s+(?:was|were|is|are|has been|have been)\s+(\w+(?:ed|en))\s+by\s+(.+?)([.!?])$/i);
+                    if (passiveMatch) {
+                        const [, obj, verb, subj, punct] = passiveMatch;
+                        s = subj.trim().charAt(0).toUpperCase() + subj.trim().slice(1) + ' ' + verb + ' ' + obj.trim().toLowerCase() + punct;
+                        totalChanges++;
+                        transformed = true;
+                    }
+                }
+
+                // Invert conditional: "If X, then Y" -> "Y, assuming X" or "Y -- but only if X"
+                if (!transformed && chance(intensity * 0.3)) {
+                    const condMatch = s.match(/^If\s+(.+?),\s+(?:then\s+)?(.+?)([.!?])$/i);
+                    if (condMatch) {
+                        const [, condition, result_, punct] = condMatch;
+                        s = pick([
+                            result_.charAt(0).toUpperCase() + result_.slice(1) + ' -- but only if ' + condition.toLowerCase() + punct,
+                            result_.charAt(0).toUpperCase() + result_.slice(1) + ', assuming ' + condition.toLowerCase() + punct,
+                            'Assuming ' + condition.toLowerCase() + ', then yeah -- ' + result_.toLowerCase() + punct,
+                        ]);
+                        totalChanges++;
+                        transformed = true;
+                    }
+                }
+
+                // Break "X, Y, and Z" lists into separate points
+                if (!transformed && chance(intensity * 0.25)) {
+                    const listMatch = s.match(/(.+?)(?::|includes?|involves?|consists? of|such as)\s*(.+?),\s*(.+?),\s*(?:and|as well as)\s*(.+?)([.!?])$/i);
+                    if (listMatch) {
+                        const [, intro, a, b, c, punct] = listMatch;
+                        s = intro + '? Well, start with ' + a.trim() + '. Then there is ' + b.trim() + '. And do not forget ' + c.trim() + punct;
+                        totalChanges++;
+                        transformed = true;
+                    }
+                }
+
+                // Front-load the interesting part: "The result of X was Y" -> "Y. That was the result of X."
+                if (!transformed && chance(intensity * 0.2)) {
+                    const resultMatch = s.match(/^(?:The result|The outcome|The effect|The consequence|The impact) of (.+?) (?:was|is|has been) (.+?)([.!?])$/i);
+                    if (resultMatch) {
+                        const [, cause, effect, punct] = resultMatch;
+                        s = effect.charAt(0).toUpperCase() + effect.slice(1) + punct + ' That is what came out of ' + cause.toLowerCase() + '.';
+                        totalChanges++;
+                    }
+                }
+
+                result.push(s);
+            }
+
+            return result;
+        }
+
+        // --- PERPLEXITY BOOST ---
+        // Inject unexpected words/phrases that break token prediction patterns.
+        // AI detectors work by measuring how "predictable" each word is.
+        // Humans use words that are statistically surprising in context.
+        function boostPerplexity(sentences, intensity) {
+            if (!features['perplexity-boost']) return sentences;
             const result = [];
 
             for (let i = 0; i < sentences.length; i++) {
                 let s = sentences[i];
                 const words = s.split(/\s+/);
 
-                // Strategy 1: Split long sentences into a short fragment + remainder
-                if (words.length > 18 && chance(intensity * 0.35)) {
-                    const splitPoint = 3 + Math.floor(Math.random() * 5);
-                    const fragment = words.slice(0, splitPoint).join(' ');
-                    const remainder = words.slice(splitPoint).join(' ');
+                // Strategy 1: Replace bland verb+adverb with vivid single verb
+                s = s.replace(/\b(very|really|extremely|incredibly|highly) (important|significant|relevant|useful|effective|common|difficult)\b/gi, (m, adv, adj) => {
+                    const vivid = {
+                        'important': ['vital', 'non-negotiable', 'mission-critical', 'central'],
+                        'significant': ['massive', 'game-changing', 'eye-opening', 'seismic'],
+                        'relevant': ['on-point', 'directly tied to', 'front-and-center'],
+                        'useful': ['indispensable', 'clutch', 'a lifesaver'],
+                        'effective': ['potent', 'surgical', 'dead-on'],
+                        'common': ['rampant', 'practically universal', 'a dime a dozen'],
+                        'difficult': ['brutal', 'a real grind', 'no walk in the park'],
+                    };
+                    const alts = vivid[adj.toLowerCase()];
+                    if (alts && chance(intensity * 0.6)) { totalChanges++; return pick(alts); }
+                    return m;
+                });
 
-                    // Make fragment a proper sentence
-                    let frag = fragment.replace(/[,;:]$/, '') + '.';
-                    frag = frag.charAt(0).toUpperCase() + frag.slice(1);
+                // Strategy 2: Break collocations (expected word pairs)
+                // "play a role" -> "carry weight", "have an impact" -> "leave a mark"
+                const collocations = [
+                    [/\bplay(?:s|ed|ing)? a (?:big |major |key |important )?role\b/gi, ['carry weight', 'leave a mark', 'tip the scales', 'move the needle']],
+                    [/\bhave an impact\b/gi, ['leave a dent', 'make waves', 'shake things up', 'change the equation']],
+                    [/\bmake a difference\b/gi, ['move the needle', 'change the game', 'shift the balance', 'tip things']],
+                    [/\btake into account\b/gi, ['factor in', 'weigh', 'not overlook', 'keep on the radar']],
+                    [/\btake into consideration\b/gi, ['think hard about', 'weigh carefully', 'not brush aside']],
+                    [/\bcome to the conclusion\b/gi, ['land on the idea that', 'end up thinking', 'walk away believing']],
+                    [/\bprovide(?:s)? (?:a |an )?(?:overview|summary|analysis|examination)\b/gi, ['breaks down', 'walks through', 'lays out', 'paints a picture of']],
+                    [/\bshed(?:s)? light on\b/gi, ['crack open', 'pull back the curtain on', 'bring into focus', 'illuminate']],
+                    [/\braise(?:s)? (?:the |a )?question\b/gi, ['force you to ask', 'beg the question', 'put the spotlight on']],
+                    [/\bon the one hand\b/gi, ['from one angle', 'one way to see it is', 'viewed one way']],
+                    [/\bon the other hand\b/gi, ['flip it around and', 'but from the opposite direction', 'viewed differently']],
+                    [/\bgiven the fact that\b/gi, ['since', 'because', 'seeing how', 'considering']],
+                    [/\bwith regard to\b/gi, ['when it comes to', 'about', 'on the subject of', 'concerning']],
+                    [/\bwith respect to\b/gi, ['about', 'around', 'when we talk about', 'for']],
+                    [/\bas a matter of fact\b/gi, ['actually', 'in fact', 'truth is', 'real talk']],
+                    [/\bfor the purpose of\b/gi, ['to', 'in order to', 'with the goal of', 'aiming to']],
+                    [/\bin the context of\b/gi, ['when you look at', 'inside', 'within', 'against the backdrop of']],
+                    [/\bfrom the perspective of\b/gi, ['through the eyes of', 'as seen by', 'from where X sits']],
+                ];
 
-                    let rem = remainder.charAt(0).toUpperCase() + remainder.slice(1);
-                    if (!rem.match(/[.!?]$/)) rem += '.';
-
-                    result.push(frag);
-                    result.push(rem);
-                    totalChanges++;
-                    continue;
+                for (const [pattern, alts] of collocations) {
+                    s = s.replace(pattern, (m) => {
+                        if (chance(intensity * 0.65)) { totalChanges++; return pick(alts); }
+                        return m;
+                    });
                 }
 
-                // Strategy 2: Merge two short sentences into one compound sentence
-                if (words.length < 12 && i < sentences.length - 1) {
-                    const nextWords = sentences[i + 1].split(/\s+/);
-                    if (nextWords.length < 12 && chance(intensity * 0.3)) {
-                        const connectors = [' -- ', ', and ', ', but honestly ', '; basically, ', ', which means '];
-                        const joined = s.replace(/[.!?]$/, '') + pick(connectors) +
-                            sentences[i + 1].charAt(0).toLowerCase() + sentences[i + 1].slice(1);
-                        result.push(joined);
-                        i++; // skip next
+                // Strategy 3: Insert unexpected qualifiers mid-sentence
+                if (words.length > 12 && chance(intensity * 0.15)) {
+                    const qualifiers = [
+                        'at least to some extent', 'depending on who you ask', 'for better or worse',
+                        'in most cases anyway', 'though not always', 'to varying degrees',
+                        'and this part is debatable', 'which is an oversimplification but still',
+                    ];
+                    const wds = s.split(/\s+/);
+                    const insertAt = 4 + Math.floor(Math.random() * Math.min(6, wds.length - 6));
+                    wds.splice(insertAt, 0, '(' + pick(qualifiers) + ')');
+                    s = wds.join(' ');
+                    totalChanges++;
+                }
+
+                result.push(s);
+            }
+
+            return result;
+        }
+
+        // --- BURSTINESS ENGINE ---
+        // Detectors flag uniform sentence lengths. This creates EXTREME variation.
+        function injectBurstiness(sentences, intensity) {
+            if (!features.burstiness) return sentences;
+            const result = [];
+
+            for (let i = 0; i < sentences.length; i++) {
+                let s = sentences[i];
+                const wc = s.split(/\s+/).length;
+
+                // STRATEGY 1: Brutally split long sentences
+                if (wc > 20 && chance(intensity * 0.45)) {
+                    const words = s.split(/\s+/);
+                    // Find a natural break point
+                    let splitIdx = -1;
+                    const breakWords = [', which', ', and', ', but', ', so', '; ', ' -- ', ', however', ', because', ', since', ', although'];
+                    for (const bw of breakWords) {
+                        const idx = s.indexOf(bw);
+                        if (idx > 15 && idx < s.length - 15) {
+                            splitIdx = s.substring(0, idx).split(/\s+/).length;
+                            break;
+                        }
+                    }
+
+                    if (splitIdx > 3) {
+                        const first = words.slice(0, splitIdx).join(' ').replace(/[,;:]\s*$/, '') + '.';
+                        let second = words.slice(splitIdx).join(' ').replace(/^[,;:\s]+/, '');
+                        second = second.charAt(0).toUpperCase() + second.slice(1);
+                        if (!second.match(/[.!?]$/)) second += '.';
+                        result.push(first);
+                        result.push(second);
                         totalChanges++;
                         continue;
                     }
                 }
 
-                // Strategy 3: Insert ultra-short punchy interjections
-                if (chance(intensity * 0.08) && i > 0) {
-                    const interjections = [
-                        'Think about that.', 'Big deal.', 'Not great.', 'Fair enough.',
-                        'That matters.', 'Seriously.', 'Wild, right?', 'Makes sense.',
-                        'Worth noting.', 'No surprise there.', 'Go figure.', 'Not ideal.',
-                        'Key point.', 'Let that sink in.', 'Pretty telling.',
-                    ];
-                    result.push(pick(interjections));
-                    totalChanges++;
-                }
-
-                result.push(s);
-            }
-
-            return result;
-        }
-
-        // --- COGNITIVE LOAD / IMPERFECTION INJECTION ---
-        // Humans show traces of mid-thought corrections, asides,
-        // qualifications, and slight repetitions. This simulates that.
-        function injectCognitiveLoad(sentences, intensity) {
-            if (!features['cognitive-load']) return sentences;
-            const result = [];
-
-            for (let i = 0; i < sentences.length; i++) {
-                let s = sentences[i];
-
-                // Insert hedging qualifiers
-                if (chance(intensity * 0.15)) {
-                    const hedges = discourseMarkers.hedging;
-                    const words = s.split(/\s+/);
-                    if (words.length > 6) {
-                        const insertIdx = 2 + Math.floor(Math.random() * Math.min(4, words.length - 4));
-                        words.splice(insertIdx, 0, pick(hedges));
-                        s = words.join(' ');
-                        totalChanges++;
-                    }
-                }
-
-                // Add parenthetical asides
-                if (chance(intensity * 0.1) && s.length > 40) {
-                    const aside = pick(discourseMarkers.parenthetical);
-                    const commaIdx = s.indexOf(', ', 10);
-                    if (commaIdx > 0 && commaIdx < s.length - 20) {
-                        s = s.substring(0, commaIdx) + ' (' + aside + ')' + s.substring(commaIdx);
-                        totalChanges++;
-                    }
-                }
-
-                // Occasional emphasis words
-                if (chance(intensity * 0.12)) {
-                    const emph = pick(discourseMarkers.emphasis);
-                    const words = s.split(/\s+/);
-                    if (words.length > 5) {
-                        const idx = 1 + Math.floor(Math.random() * Math.min(3, words.length - 3));
-                        words.splice(idx, 0, emph);
-                        s = words.join(' ');
-                        totalChanges++;
-                    }
-                }
-
-                result.push(s);
-            }
-
-            return result;
-        }
-
-        // --- DISCOURSE MARKERS (filler words done right) ---
-        function addDiscourseMarkers(sentences, intensity) {
-            if (!features.filler) return sentences;
-            const result = [];
-            let lastMarkerIdx = -3; // track spacing
-
-            for (let i = 0; i < sentences.length; i++) {
-                let s = sentences[i];
-
-                // Opening markers (only at transitions, not every sentence)
-                if (i - lastMarkerIdx >= 3 && chance(intensity * 0.2)) {
-                    const marker = pick(discourseMarkers.opening);
-                    s = marker + ' ' + s.charAt(0).toLowerCase() + s.slice(1);
-                    lastMarkerIdx = i;
-                    totalChanges++;
-                }
-
-                // Transition markers between topical shifts
-                if (i > 0 && i - lastMarkerIdx >= 4 && chance(intensity * 0.15)) {
-                    const trans = pick(discourseMarkers.transition);
-                    s = trans + ' ' + s.charAt(0).toLowerCase() + s.slice(1);
-                    lastMarkerIdx = i;
-                    totalChanges++;
-                }
-
-                result.push(s);
-            }
-
-            return result;
-        }
-
-        // --- SEMANTIC DRIFT ---
-        // Slightly paraphrase by rearranging clause order,
-        // swapping adjective positions, inserting qualifiers
-        function applySemanticDrift(text, intensity) {
-            if (!features['semantic-drift']) return text;
-
-            // Swap "X and Y" to "Y and X" sometimes
-            text = text.replace(/\b(\w+) and (\w+)\b/g, (match, a, b) => {
-                if (chance(intensity * 0.15)) {
-                    totalChanges++;
-                    return b + ' and ' + a;
-                }
-                return match;
-            });
-
-            // "very X" -> alternatives
-            text = text.replace(/\bvery (\w+)/gi, (match, adj) => {
-                if (chance(intensity * 0.4)) {
-                    totalChanges++;
-                    const intensifiers = ['really', 'quite', 'pretty', 'incredibly', 'super', 'extremely'];
-                    return pick(intensifiers) + ' ' + adj;
-                }
-                return match;
-            });
-
-            // "is able to" -> "can"
-            text = text.replace(/\bis able to\b/gi, (match) => {
-                if (chance(intensity * 0.7)) { totalChanges++; return 'can'; }
-                return match;
-            });
-
-            // "in order to" -> "to"
-            text = text.replace(/\bin order to\b/gi, (match) => {
-                if (chance(intensity * 0.6)) { totalChanges++; return 'to'; }
-                return match;
-            });
-
-            // "a large number of" -> "lots of"
-            text = text.replace(/\ba (large|great|significant) (number|amount|quantity) of\b/gi, (match) => {
-                if (chance(intensity * 0.6)) {
-                    totalChanges++;
-                    return pick(['lots of', 'plenty of', 'a ton of', 'quite a bit of', 'a good deal of']);
-                }
-                return match;
-            });
-
-            // "the fact that" -> trimmed
-            text = text.replace(/\bthe fact that\b/gi, (match) => {
-                if (chance(intensity * 0.5)) { totalChanges++; return 'that'; }
-                return match;
-            });
-
-            // "on a daily basis" -> "every day"
-            text = text.replace(/\bon a (daily|regular|consistent) basis\b/gi, (match, freq) => {
-                if (chance(intensity * 0.6)) {
-                    totalChanges++;
-                    const map = { daily: 'every day', regular: 'regularly', consistent: 'consistently' };
-                    return map[freq.toLowerCase()] || 'regularly';
-                }
-                return match;
-            });
-
-            // "has the ability to" -> "can"
-            text = text.replace(/\bhas the ability to\b/gi, (match) => {
-                if (chance(intensity * 0.7)) { totalChanges++; return 'can'; }
-                return match;
-            });
-
-            // "it is clear that" -> "clearly"
-            text = text.replace(/\bit is clear that\b/gi, (match) => {
-                if (chance(intensity * 0.5)) { totalChanges++; return 'clearly,'; }
-                return match;
-            });
-
-            // "due to" -> "because of"
-            text = text.replace(/\bdue to\b/gi, (match) => {
-                if (chance(intensity * 0.4)) { totalChanges++; return pick(['because of', 'thanks to', 'owing to']); }
-                return match;
-            });
-
-            return text;
-        }
-
-        // --- ACTIVE VOICE CONVERSION ---
-        function convertToActiveVoice(text, intensity) {
-            if (!features['active-voice']) return text;
-
-            // "X was done by Y" -> "Y did X"
-            text = text.replace(/\b(\w+(?:\s+\w+)?)\s+(?:was|were|is|are|has been|have been)\s+(\w+ed)\s+by\s+(\w+(?:\s+\w+)?)\b/gi, (match, obj, verb, subj) => {
-                if (chance(intensity * 0.5)) {
-                    totalChanges++;
-                    return subj + ' ' + verb.replace(/ed$/, 's') + ' ' + obj;
-                }
-                return match;
-            });
-
-            // "it was found that" -> "we found that" / "they found that"
-            text = text.replace(/\bit was (found|discovered|determined|observed|noted|shown) that\b/gi, (match, verb) => {
-                if (chance(intensity * 0.5)) {
-                    totalChanges++;
-                    const subjects = ['researchers', 'they', 'studies', 'the data'];
-                    return pick(subjects) + ' ' + verb + ' that';
-                }
-                return match;
-            });
-
-            // "there are X that" -> "X exist" or rephrase
-            text = text.replace(/\bthere (?:are|is|exist) (many|several|numerous|some|various) (\w+) (?:that|which)\b/gi, (match, quant, noun) => {
-                if (chance(intensity * 0.4)) {
-                    totalChanges++;
-                    return pick(['many', 'several', 'quite a few', 'various']) + ' ' + noun;
-                }
-                return match;
-            });
-
-            return text;
-        }
-
-        // --- SENTENCE RESTRUCTURING ---
-        function restructureSentences(sentences, intensity) {
-            if (!features.structure) return sentences;
-
-            return sentences.map((sentence) => {
-                if (!chance(intensity * 0.2)) return sentence;
-
-                // Clause rearrangement
-                const commaIdx = sentence.indexOf(', ');
-                if (commaIdx > 15 && commaIdx < sentence.length - 15) {
-                    const firstPart = sentence.substring(0, commaIdx);
-                    const secondPart = sentence.substring(commaIdx + 2);
-                    if (chance(0.5)) {
-                        totalChanges++;
-                        const cap = secondPart.charAt(0).toUpperCase() + secondPart.slice(1);
-                        const low = firstPart.charAt(0).toLowerCase() + firstPart.slice(1);
-                        const period = cap.endsWith('.') ? '' : '.';
-                        return cap.replace(/\.$/, '') + ' -- ' + low + period;
-                    }
-                }
-
-                // Sentence starter injection
-                if (chance(intensity * 0.12) && !sentence.match(/^(The thing|What|When you|From what|In my|Honestly|It|One thing|Here|Look|So|Okay)/i)) {
-                    totalChanges++;
-                    const starter = pick(sentenceStarters);
-                    return starter + sentence.charAt(0).toLowerCase() + sentence.slice(1);
-                }
-
-                return sentence;
-            });
-        }
-
-        // --- PARAGRAPH REFORM ---
-        // Vary paragraph lengths, break up walls of text,
-        // occasionally merge short paragraphs
-        function reformParagraphs(chunks, intensity) {
-            if (!features['paragraph-reform']) return chunks;
-
-            const reformed = [];
-            for (let i = 0; i < chunks.length; i++) {
-                const chunk = chunks[i];
-
-                // Break large chunks further
-                if (chunk.sentences.length > 5 && chance(intensity * 0.4)) {
-                    const mid = 2 + Math.floor(Math.random() * (chunk.sentences.length - 3));
-                    reformed.push({ sentences: chunk.sentences.slice(0, mid), type: 'reformed' });
-                    reformed.push({ sentences: chunk.sentences.slice(mid), type: 'reformed' });
-                    totalChanges++;
-                }
-                // Merge tiny adjacent chunks
-                else if (chunk.sentences.length <= 2 && i < chunks.length - 1 && chunks[i + 1].sentences.length <= 2 && chance(intensity * 0.3)) {
-                    reformed.push({
-                        sentences: [...chunk.sentences, ...chunks[i + 1].sentences],
-                        type: 'merged'
-                    });
-                    i++; // skip next
-                    totalChanges++;
-                }
-                else {
-                    reformed.push(chunk);
-                }
-            }
-            return reformed;
-        }
-
-        // --- MINOR TYPOS ---
-        function addMinorTypos(text, intensity) {
-            if (!features.typos) return text;
-            const words = text.split(' ');
-            return words.map(word => {
-                if (word.length > 5 && chance(intensity * 0.02)) {
-                    totalChanges++;
-                    const idx = Math.floor(Math.random() * (word.length - 2)) + 1;
-                    const arr = word.split('');
-                    [arr[idx], arr[idx + 1]] = [arr[idx + 1], arr[idx]];
-                    return arr.join('');
-                }
-                return word;
-            }).join(' ');
-        }
-
-        // --- PUNCTUATION VARIATION ---
-        function varyPunctuation(sentences, intensity) {
-            const result = [];
-            for (let i = 0; i < sentences.length; i++) {
-                let s = sentences[i];
-
-                // Occasionally use em-dash to join
-                if (i < sentences.length - 1 && chance(intensity * 0.08)) {
-                    const next = sentences[i + 1];
-                    if (s.length < 80 && next && next.length < 80) {
-                        totalChanges++;
-                        s = s.replace(/[.!?]$/, '') + ' -- ' + next.charAt(0).toLowerCase() + next.slice(1);
-                        i++;
-                    }
-                }
-
-                // Occasionally add rhetorical question
-                if (chance(intensity * 0.04) && !s.includes('?')) {
-                    const questions = [
-                        'And why does that matter?', 'Right?', 'See the pattern here?',
-                        'Makes you think, doesn\'t it?', 'Sound familiar?',
+                // STRATEGY 2: Create ultra-short impact sentences (2-5 words)
+                if (chance(intensity * 0.1) && i > 0 && i < sentences.length - 1) {
+                    const punches = [
+                        'Full stop.', 'No exceptions.', 'Period.', 'Hard truth.',
+                        'Think about that.', 'Not even close.', 'That is the reality.',
+                        'Simple as that.', 'And that matters.', 'Seriously.',
+                        'Read that again.', 'Wild.', 'Game changer.', 'Huge difference.',
+                        'No kidding.', 'Not optional.', 'Do not skip this.',
+                        'That is the key.', 'Fact.', 'Not a coincidence.',
                     ];
                     result.push(s);
-                    result.push(pick(questions));
+                    result.push(pick(punches));
                     totalChanges++;
                     continue;
                 }
 
+                // STRATEGY 3: Merge two short sentences with unexpected connectors
+                if (wc < 10 && i < sentences.length - 1 && sentences[i + 1].split(/\s+/).length < 10 && chance(intensity * 0.35)) {
+                    const connectors = [
+                        ' -- and honestly, ',
+                        ' -- which is exactly why ',
+                        ', and when you combine that with the fact that ',
+                        '; pair that with ',
+                        ' (and this connects to something bigger) -- ',
+                    ];
+                    const merged = s.replace(/[.!?]$/, '') + pick(connectors) + sentences[i + 1].charAt(0).toLowerCase() + sentences[i + 1].slice(1);
+                    result.push(merged);
+                    i++;
+                    totalChanges++;
+                    continue;
+                }
+
+                // STRATEGY 4: Occasionally create a very long sentence by connecting 3
+                if (wc < 15 && i < sentences.length - 2 && chance(intensity * 0.08)) {
+                    const s2 = sentences[i + 1];
+                    const s3 = sentences[i + 2];
+                    if (s2.split(/\s+/).length < 15 && s3.split(/\s+/).length < 15) {
+                        const long = s.replace(/[.!?]$/, '') + ', and ' +
+                            s2.charAt(0).toLowerCase() + s2.slice(1).replace(/[.!?]$/, '') +
+                            ' -- which all ties back to ' +
+                            s3.charAt(0).toLowerCase() + s3.slice(1);
+                        result.push(long);
+                        i += 2;
+                        totalChanges++;
+                        continue;
+                    }
+                }
+
                 result.push(s);
             }
+
             return result;
         }
 
+        // --- COGNITIVE NOISE ---
+        // Inject the kind of messy thinking that real humans produce:
+        // self-corrections, hedging, emphasis, incomplete reformulations.
+        function injectCognitiveNoise(sentences, intensity) {
+            if (!features['cognitive-noise']) return sentences;
+            const result = [];
+            let lastNoiseIdx = -4;
+
+            for (let i = 0; i < sentences.length; i++) {
+                let s = sentences[i];
+
+                // Self-correction at end of sentence
+                if (i - lastNoiseIdx >= 3 && chance(intensity * 0.08)) {
+                    s = s.replace(/([.!?])$/, '') + ' -- ' + pick(humanVoiceInserts.corrections);
+                    if (!s.match(/[.!?]$/)) s += '.';
+                    lastNoiseIdx = i;
+                    totalChanges++;
+                }
+
+                // Parenthetical aside mid-sentence
+                if (i - lastNoiseIdx >= 3 && s.split(/\s+/).length > 10 && chance(intensity * 0.12)) {
+                    const aside = pick(humanVoiceInserts.asides);
+                    const words = s.split(/\s+/);
+                    const insertAt = 3 + Math.floor(Math.random() * Math.min(5, words.length - 5));
+                    words.splice(insertAt, 0, aside);
+                    s = words.join(' ');
+                    lastNoiseIdx = i;
+                    totalChanges++;
+                }
+
+                // Hedging qualifiers
+                if (chance(intensity * 0.1)) {
+                    const hedges = ['I think', 'arguably', 'in a sense', 'to some degree', 'broadly speaking', 'if we are being honest'];
+                    const words = s.split(/\s+/);
+                    if (words.length > 6) {
+                        const idx = 1 + Math.floor(Math.random() * Math.min(3, words.length - 3));
+                        words.splice(idx, 0, pick(hedges));
+                        s = words.join(' ');
+                        totalChanges++;
+                    }
+                }
+
+                result.push(s);
+            }
+
+            return result;
+        }
+
+        // --- HUMAN VOICE ---
+        // Add the sentence openers, bridges, and paragraph connectors
+        // that make text feel like a person wrote it, not a machine.
+        function injectHumanVoice(sentences, intensity) {
+            if (!features['human-voice']) return sentences;
+            const result = [];
+            let lastVoiceIdx = -3;
+
+            for (let i = 0; i < sentences.length; i++) {
+                let s = sentences[i];
+
+                // Bridge sentences before key points
+                if (i > 1 && i - lastVoiceIdx >= 4 && chance(intensity * 0.15)) {
+                    result.push(pick(humanVoiceInserts.bridges));
+                    lastVoiceIdx = i;
+                    totalChanges++;
+                }
+
+                // Sentence openers that break the predictable pattern
+                if (i - lastVoiceIdx >= 3 && chance(intensity * 0.12)) {
+                    // Don't add opener if sentence already starts with one
+                    if (!s.match(/^(The weird|What gets|Nobody|Here is|Funny|Counter|Not everyone|This might|Look at|I keep|The uncomfortable|People tend|Strip away|Call me|Whether)/i)) {
+                        const opener = pick(humanVoiceInserts.openers);
+                        s = opener + ' ' + s.charAt(0).toLowerCase() + s.slice(1);
+                        lastVoiceIdx = i;
+                        totalChanges++;
+                    }
+                }
+
+                // Direct reader address
+                if (chance(intensity * 0.06)) {
+                    const addresses = ['you have probably noticed this', 'and I bet you have seen this too', 'you know what I am talking about', 'picture this'];
+                    const words = s.split(/\s+/);
+                    if (words.length > 8) {
+                        s = s.replace(/([.!?])$/, ' -- ' + pick(addresses) + '$1');
+                        totalChanges++;
+                    }
+                }
+
+                result.push(s);
+            }
+
+            return result;
+        }
+
+        // --- FLOW BREAKING ---
+        // Break the predictable intro->body->conclusion structure.
+        // Real human writing wanders, circles back, and digresses.
+        function breakFlow(chunks, intensity) {
+            if (!features['flow-break']) return chunks;
+            const result = [];
+
+            for (let i = 0; i < chunks.length; i++) {
+                const chunk = chunks[i];
+
+                // Insert paragraph connectors between chunks
+                if (i > 0 && chance(intensity * 0.2)) {
+                    result.push({
+                        sentences: [pick(humanVoiceInserts.paraConnectors)],
+                        isNewPara: true,
+                        isInjected: true
+                    });
+                    totalChanges++;
+                }
+
+                // Break large chunks into uneven pieces
+                if (chunk.sentences.length > 5 && chance(intensity * 0.5)) {
+                    const split = 1 + Math.floor(Math.random() * 2); // Split after 1-2 sentences
+                    result.push({ sentences: chunk.sentences.slice(0, split), isNewPara: chunk.isNewPara });
+                    result.push({ sentences: chunk.sentences.slice(split), isNewPara: true });
+                    totalChanges++;
+                    continue;
+                }
+
+                // Occasionally merge two tiny chunks
+                if (chunk.sentences.length <= 2 && i < chunks.length - 1 && chunks[i + 1].sentences.length <= 2 && chance(intensity * 0.3)) {
+                    result.push({
+                        sentences: [...chunk.sentences, ...chunks[i + 1].sentences],
+                        isNewPara: chunk.isNewPara
+                    });
+                    i++;
+                    totalChanges++;
+                    continue;
+                }
+
+                result.push(chunk);
+            }
+
+            return result;
+        }
+
+        // --- SEMANTIC SIMPLIFICATION ---
+        // Replace complex constructions with simpler ones that humans prefer
+        function simplifyConstructions(text, intensity) {
+            const replacements = [
+                [/\bis able to\b/gi, 'can'],
+                [/\bin order to\b/gi, 'to'],
+                [/\bhas the ability to\b/gi, 'can'],
+                [/\ba large number of\b/gi, 'lots of'],
+                [/\ba great deal of\b/gi, 'a lot of'],
+                [/\bthe fact that\b/gi, 'that'],
+                [/\bon a daily basis\b/gi, 'every day'],
+                [/\bon a regular basis\b/gi, 'regularly'],
+                [/\bat this point in time\b/gi, 'right now'],
+                [/\bin the event that\b/gi, 'if'],
+                [/\bprior to\b/gi, 'before'],
+                [/\bsubsequent to\b/gi, 'after'],
+                [/\bin close proximity to\b/gi, 'near'],
+                [/\bhas a tendency to\b/gi, 'tends to'],
+                [/\bfor the purpose of\b/gi, 'to'],
+                [/\bin spite of the fact that\b/gi, 'even though'],
+                [/\bit should be noted that\b/gi, ''],
+                [/\bit is interesting to note that\b/gi, 'interestingly,'],
+                [/\bas a consequence of\b/gi, 'because of'],
+                [/\bin the near future\b/gi, 'soon'],
+                [/\bat the present time\b/gi, 'now'],
+                [/\buntil such time as\b/gi, 'until'],
+                [/\bwith the exception of\b/gi, 'except for'],
+                [/\bin conjunction with\b/gi, 'with'],
+                [/\bfor the most part\b/gi, 'mostly'],
+                [/\bin the process of\b/gi, 'currently'],
+            ];
+
+            for (const [pattern, replacement] of replacements) {
+                text = text.replace(pattern, (m) => {
+                    if (chance(intensity * 0.65)) { totalChanges++; return replacement; }
+                    return m;
+                });
+            }
+
+            // "very X" -> vivid single word
+            text = text.replace(/\bvery (\w+)/gi, (m, adj) => {
+                const vivid = {
+                    good: 'excellent', bad: 'terrible', big: 'massive', small: 'tiny',
+                    important: 'critical', happy: 'thrilled', sad: 'devastated',
+                    fast: 'lightning-quick', slow: 'glacial', hard: 'grueling',
+                    easy: 'effortless', old: 'ancient', new: 'brand-new',
+                    tired: 'exhausted', hungry: 'starving', cold: 'freezing',
+                    hot: 'scorching', scared: 'terrified', angry: 'furious',
+                    beautiful: 'stunning', ugly: 'hideous', smart: 'brilliant',
+                };
+                if (vivid[adj.toLowerCase()] && chance(intensity * 0.6)) {
+                    totalChanges++; return vivid[adj.toLowerCase()];
+                }
+                return m;
+            });
+
+            return text;
+        }
+
+        // --- MINOR TYPOS ---
+        function addTypos(text, intensity) {
+            if (!features.typos) return text;
+            return text.split(' ').map(w => {
+                if (w.length > 5 && chance(intensity * 0.015)) {
+                    totalChanges++;
+                    const i = Math.floor(Math.random() * (w.length - 2)) + 1;
+                    const a = w.split(''); [a[i], a[i+1]] = [a[i+1], a[i]];
+                    return a.join('');
+                }
+                return w;
+            }).join(' ');
+        }
+
         // --- CLEANUP ---
-        function cleanUpText(text) {
+        function cleanup(text) {
             return text
                 .replace(/\s{2,}/g, ' ')
                 .replace(/\s+([.,;:!?])/g, '$1')
@@ -1466,455 +1101,296 @@
                 .replace(/,\s*,/g, ',')
                 .replace(/\(\s+/g, '(')
                 .replace(/\s+\)/g, ')')
+                .replace(/\.\s*--/g, ' --')
+                .replace(/--\s*\./g, '.')
                 .trim();
         }
 
         // =============================================
-        // MASTER HUMANIZATION ORCHESTRATOR
+        // MASTER ORCHESTRATOR
         // =============================================
         function humanize(text) {
             if (!text.trim()) return '';
             totalChanges = 0;
 
-            const multiplier = modeMultipliers[currentMode] || 0.6;
-            const baseIntensity = intensitySlider.value / 100;
-            const intensity = Math.min(baseIntensity * multiplier + 0.1, 1.0);
+            const mult = modeMultipliers[currentMode] || 0.6;
+            const base = intensitySlider.value / 100;
+            const intensity = Math.min(base * mult + 0.15, 1.0);
 
-            // PHASE 1: Decompose into chunks
-            const chunks = decomposeIntoChunks(text);
+            // PHASE 1: Decompose
+            let chunks = decomposeIntoChunks(text);
 
-            // Reform paragraph structure
-            const reformedChunks = reformParagraphs(chunks, intensity);
+            // PHASE 1.5: Break flow at chunk level
+            chunks = breakFlow(chunks, intensity);
 
-            // PHASE 2: Process each chunk through the pipeline
-            const processedChunks = reformedChunks.map((chunk, idx) => {
+            // PHASE 2: Process each chunk
+            const processedChunks = chunks.map((chunk) => {
                 let chunkText = chunk.sentences.join(' ');
 
-                // Text-level transformations
-                chunkText = removeAIPhrases(chunkText, intensity);
-                chunkText = applySynonymSwap(chunkText, intensity);
+                // Skip injected bridge sentences
+                if (chunk.isInjected) return chunkText;
+
+                // TEXT-LEVEL transforms (operate on the joined text)
+                chunkText = stripAI(chunkText, intensity);
+                chunkText = shiftVocab(chunkText, intensity);
                 chunkText = applyContractions(chunkText, intensity);
-                chunkText = applyTransitions(chunkText, intensity);
-                chunkText = applySemanticDrift(chunkText, intensity);
-                chunkText = convertToActiveVoice(chunkText, intensity);
-                chunkText = addMinorTypos(chunkText, intensity);
+                chunkText = simplifyConstructions(chunkText, intensity);
+                chunkText = addTypos(chunkText, intensity);
 
-                // Re-split into sentences for sentence-level transforms
-                let sentences = chunkText.split(/(?<=[.!?])\s+/).filter(s => s.trim());
+                // SENTENCE-LEVEL transforms (split, process, rejoin)
+                let sents = splitSentences(chunkText);
+                sents = deepRestructure(sents, intensity);
+                sents = boostPerplexity(sents, intensity);
+                sents = injectBurstiness(sents, intensity);
+                sents = injectCognitiveNoise(sents, intensity);
+                sents = injectHumanVoice(sents, intensity);
 
-                // Sentence-level transformations
-                sentences = restructureSentences(sentences, intensity);
-                sentences = injectBurstiness(sentences, intensity);
-                sentences = injectCognitiveLoad(sentences, intensity);
-                sentences = addDiscourseMarkers(sentences, intensity);
-                sentences = varyPunctuation(sentences, intensity);
-
-                return sentences.join(' ');
+                return sents.join(' ');
             });
 
-            // PHASE 3: Reassemble with varied paragraph spacing
-            let result = processedChunks.join('\n\n');
-            result = cleanUpText(result);
+            // PHASE 3: Reassemble with varied spacing
+            let result = '';
+            for (let i = 0; i < processedChunks.length; i++) {
+                const text = processedChunks[i];
+                if (i === 0) {
+                    result = text;
+                } else if (chunks[i] && chunks[i].isNewPara) {
+                    result += '\n\n' + text;
+                } else {
+                    result += ' ' + text;
+                }
+            }
 
+            result = cleanup(result);
             return result;
         }
 
         // =============================================
-        // AI DETECTION RISK ANALYSIS (heuristic)
+        // ANALYSIS
         // =============================================
         function analyzeText(text) {
             if (!text.trim()) return null;
-
             const metrics = {};
 
-            // 1. Sentence length variance (burstiness)
             const sentences = text.split(/[.!?]+/).filter(s => s.trim());
             const lengths = sentences.map(s => s.trim().split(/\s+/).length);
-            const avgLen = lengths.reduce((a, b) => a + b, 0) / lengths.length;
-            const variance = lengths.reduce((sum, l) => sum + Math.pow(l - avgLen, 2), 0) / lengths.length;
+            const avgLen = lengths.reduce((a, b) => a + b, 0) / (lengths.length || 1);
+            const variance = lengths.reduce((sum, l) => sum + Math.pow(l - avgLen, 2), 0) / (lengths.length || 1);
             const stdDev = Math.sqrt(variance);
 
             metrics.burstiness = {
-                value: stdDev.toFixed(1),
-                rating: stdDev > 8 ? 'good' : stdDev > 5 ? 'ok' : 'bad',
-                label: 'Sentence Length StdDev',
-                detail: stdDev > 8 ? 'High variance (human-like)' : stdDev > 5 ? 'Moderate variance' : 'Low variance (AI-like)',
+                value: stdDev.toFixed(1), label: 'Sentence Length StdDev',
+                rating: stdDev > 9 ? 'good' : stdDev > 5 ? 'ok' : 'bad',
+                detail: stdDev > 9 ? 'High variance (human-like)' : stdDev > 5 ? 'Moderate' : 'Low (AI-like)',
             };
 
-            // 2. Contraction ratio
             const words = text.split(/\s+/);
-            const contractionCount = (text.match(/\b\w+'\w+/g) || []).length;
-            const contractionRatio = (contractionCount / words.length * 100).toFixed(1);
+            const contrCount = (text.match(/\b\w+'\w+/g) || []).length;
+            const contrRatio = (contrCount / words.length * 100).toFixed(1);
             metrics.contractions = {
-                value: contractionRatio + '%',
-                rating: contractionRatio > 2 ? 'good' : contractionRatio > 1 ? 'ok' : 'bad',
-                label: 'Contraction Density',
-                detail: contractionRatio > 2 ? 'Natural (human-like)' : 'Low (AI-like)',
+                value: contrRatio + '%', label: 'Contraction Density',
+                rating: contrRatio > 2.5 ? 'good' : contrRatio > 1 ? 'ok' : 'bad',
+                detail: contrRatio > 2.5 ? 'Natural density' : 'Too formal (AI-like)',
             };
 
-            // 3. AI phrase count
-            let aiPhraseCount = 0;
-            for (const { pattern } of aiPhrases) {
-                const matches = text.match(pattern);
-                if (matches) aiPhraseCount += matches.length;
-                pattern.lastIndex = 0;
-            }
+            let aiCount = 0;
+            for (const { p } of aiPhrases) { const m = text.match(p); if (m) aiCount += m.length; p.lastIndex = 0; }
             metrics.aiPhrases = {
-                value: aiPhraseCount,
-                rating: aiPhraseCount === 0 ? 'good' : aiPhraseCount <= 2 ? 'ok' : 'bad',
-                label: 'AI Phrase Count',
-                detail: aiPhraseCount === 0 ? 'Clean' : aiPhraseCount + ' detected patterns',
+                value: aiCount, label: 'AI Phrase Count',
+                rating: aiCount === 0 ? 'good' : aiCount <= 2 ? 'ok' : 'bad',
+                detail: aiCount === 0 ? 'Clean' : aiCount + ' detected',
             };
 
-            // 4. Discourse marker presence
-            const fillerPatterns = /\b(honestly|basically|actually|literally|I mean|the thing is|look|you know|right|sort of|kind of|pretty much)\b/gi;
-            const fillerCount = (text.match(fillerPatterns) || []).length;
+            const fillerP = /\b(honestly|basically|actually|literally|I mean|the thing is|look|sort of|kind of|pretty much|you know|right|I think|arguably)\b/gi;
+            const fillerCount = (text.match(fillerP) || []).length;
             metrics.discourse = {
-                value: fillerCount,
-                rating: fillerCount >= 3 ? 'good' : fillerCount >= 1 ? 'ok' : 'bad',
-                label: 'Discourse Markers',
-                detail: fillerCount >= 3 ? 'Good human signal' : 'Missing human markers',
+                value: fillerCount, label: 'Discourse Markers',
+                rating: fillerCount >= 4 ? 'good' : fillerCount >= 2 ? 'ok' : 'bad',
+                detail: fillerCount >= 4 ? 'Strong human signal' : 'Needs more human voice',
             };
 
-            // 5. Vocabulary diversity (type-token ratio)
-            const lowerWords = words.map(w => w.toLowerCase().replace(/[^a-z]/g, '')).filter(w => w);
-            const uniqueWords = new Set(lowerWords);
-            const ttr = (uniqueWords.size / lowerWords.length * 100).toFixed(1);
+            const lw = words.map(w => w.toLowerCase().replace(/[^a-z]/g, '')).filter(w => w);
+            const ttr = ((new Set(lw)).size / (lw.length || 1) * 100).toFixed(1);
             metrics.vocabulary = {
-                value: ttr + '%',
+                value: ttr + '%', label: 'Vocabulary Diversity',
                 rating: ttr > 60 ? 'good' : ttr > 45 ? 'ok' : 'bad',
-                label: 'Vocabulary Diversity',
                 detail: 'Type-token ratio',
             };
 
-            // 6. Paragraph length variation
-            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
-            const paraLens = paragraphs.map(p => p.split(/\s+/).length);
-            let paraVariance = 0;
-            if (paraLens.length > 1) {
-                const paraAvg = paraLens.reduce((a, b) => a + b, 0) / paraLens.length;
-                paraVariance = Math.sqrt(paraLens.reduce((s, l) => s + Math.pow(l - paraAvg, 2), 0) / paraLens.length);
-            }
-            metrics.paraVariation = {
-                value: paraVariance.toFixed(1),
-                rating: paraVariance > 15 ? 'good' : paraVariance > 8 ? 'ok' : 'bad',
-                label: 'Paragraph Variation',
-                detail: paraVariance > 15 ? 'Varied (human-like)' : 'Uniform (AI-like)',
+            // Short sentence ratio
+            const shortSents = lengths.filter(l => l <= 6).length;
+            const shortRatio = ((shortSents / (lengths.length || 1)) * 100).toFixed(0);
+            metrics.shortSentences = {
+                value: shortRatio + '%', label: 'Short Sentence Ratio',
+                rating: shortRatio > 15 ? 'good' : shortRatio > 5 ? 'ok' : 'bad',
+                detail: shortRatio > 15 ? 'Good mix of lengths' : 'Too uniform (AI-like)',
             };
 
-            // 7. Overall risk score
+            // Question ratio
+            const questionCount = (text.match(/\?/g) || []).length;
+            metrics.questions = {
+                value: questionCount, label: 'Rhetorical Questions',
+                rating: questionCount >= 2 ? 'good' : questionCount >= 1 ? 'ok' : 'bad',
+                detail: questionCount >= 2 ? 'Engaging (human-like)' : 'No questions (AI-like)',
+            };
+
             let riskScore = 50;
-            riskScore += aiPhraseCount * 6;
-            riskScore -= contractionCount * 2;
+            riskScore += aiCount * 7;
+            riskScore -= contrCount * 2.5;
             riskScore -= fillerCount * 3;
-            if (stdDev > 8) riskScore -= 15;
-            else if (stdDev > 5) riskScore -= 8;
-            else if (stdDev < 3) riskScore += 12;
+            riskScore -= questionCount * 4;
+            if (stdDev > 9) riskScore -= 18; else if (stdDev > 6) riskScore -= 10; else if (stdDev < 3) riskScore += 15;
+            if (shortRatio > 15) riskScore -= 8;
             if (ttr > 60) riskScore -= 5;
-            riskScore = Math.max(5, Math.min(95, riskScore));
+            riskScore = Math.max(3, Math.min(95, riskScore));
 
             metrics.overall = {
-                value: riskScore + '%',
-                rating: riskScore < 30 ? 'good' : riskScore < 55 ? 'ok' : 'bad',
-                label: 'Overall AI Risk',
-                detail: riskScore < 30 ? 'Low detection risk' : riskScore < 55 ? 'Moderate risk' : 'High detection risk',
+                value: riskScore + '%', label: 'Overall AI Risk',
+                rating: riskScore < 25 ? 'good' : riskScore < 50 ? 'ok' : 'bad',
+                detail: riskScore < 25 ? 'Low detection risk' : riskScore < 50 ? 'Moderate risk' : 'High risk',
             };
 
             return metrics;
         }
 
         function computeBurstiness(text) {
-            const sentences = text.split(/[.!?]+/).filter(s => s.trim());
-            if (sentences.length < 2) return '--';
-            const lengths = sentences.map(s => s.trim().split(/\s+/).length);
-            const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
-            const variance = lengths.reduce((sum, l) => sum + Math.pow(l - avg, 2), 0) / lengths.length;
-            return Math.sqrt(variance).toFixed(1);
+            const sents = text.split(/[.!?]+/).filter(s => s.trim());
+            if (sents.length < 2) return '--';
+            const lens = sents.map(s => s.trim().split(/\s+/).length);
+            const avg = lens.reduce((a, b) => a + b, 0) / lens.length;
+            return Math.sqrt(lens.reduce((s, l) => s + Math.pow(l - avg, 2), 0) / lens.length).toFixed(1);
         }
 
-        function computeAIRisk(text) {
+        function computeRisk(text) {
             if (!text.trim()) return '--';
-            const metrics = analyzeText(text);
-            if (!metrics) return '--';
-            return metrics.overall.value;
+            const m = analyzeText(text);
+            return m ? m.overall.value : '--';
         }
 
         // =============================================
-        // DIFF DISPLAY
+        // UI
         // =============================================
-        function showDiff(original, modified) {
-            const origWords = original.split(/\s+/);
-            const modWords = modified.split(/\s+/);
+        function showDiff(orig, mod) {
+            const ow = orig.split(/\s+/), mw = mod.split(/\s+/);
             let html = '';
-
             let oi = 0, mi = 0;
-            while (oi < origWords.length || mi < modWords.length) {
-                if (oi < origWords.length && mi < modWords.length) {
-                    if (origWords[oi] === modWords[mi]) {
-                        html += modWords[mi] + ' ';
-                        oi++; mi++;
-                    } else {
-                        html += '<span class="diff-removed">' + origWords[oi] + '</span> ';
-                        html += '<span class="diff-added">' + modWords[mi] + '</span> ';
-                        oi++; mi++;
-                    }
-                } else if (oi < origWords.length) {
-                    html += '<span class="diff-removed">' + origWords[oi] + '</span> ';
-                    oi++;
-                } else {
-                    html += '<span class="diff-added">' + modWords[mi] + '</span> ';
-                    mi++;
-                }
+            while (oi < ow.length || mi < mw.length) {
+                if (oi < ow.length && mi < mw.length) {
+                    if (ow[oi] === mw[mi]) { html += mw[mi] + ' '; oi++; mi++; }
+                    else { html += '<span class="diff-removed">' + ow[oi] + '</span> <span class="diff-added">' + mw[mi] + '</span> '; oi++; mi++; }
+                } else if (oi < ow.length) { html += '<span class="diff-removed">' + ow[oi] + '</span> '; oi++; }
+                else { html += '<span class="diff-added">' + mw[mi] + '</span> '; mi++; }
             }
-
             diffContent.innerHTML = '<div class="diff-line">' + html + '</div>';
             diffPanel.classList.add('visible');
         }
 
-        // =============================================
-        // ANALYSIS DISPLAY
-        // =============================================
         function renderAnalysis(text) {
             const metrics = analyzeText(text);
-            if (!metrics) {
-                analysisPanel.classList.remove('visible');
-                return;
-            }
-
-            let html = '';
-            for (const [key, m] of Object.entries(metrics)) {
-                html += `
-                    <div class="analysis-item">
-                        <div class="a-label">${m.label}</div>
-                        <div class="a-value ${m.rating}">${m.value}</div>
-                        <div class="a-label" style="margin-top:4px;font-size:0.65rem">${m.detail}</div>
-                    </div>
-                `;
-            }
-
-            analysisGrid.innerHTML = html;
+            if (!metrics) { analysisPanel.classList.remove('visible'); return; }
+            analysisGrid.innerHTML = Object.values(metrics).map(m =>
+                '<div class="analysis-item"><div class="a-label">' + m.label + '</div><div class="a-value ' + m.rating + '">' + m.value + '</div><div class="a-label" style="margin-top:4px;font-size:0.65rem">' + m.detail + '</div></div>'
+            ).join('');
             analysisPanel.classList.add('visible');
         }
 
-        // =============================================
-        // HISTORY
-        // =============================================
-        function addToHistory(input, output) {
-            history.unshift({
-                input: input.substring(0, 200),
-                output: output.substring(0, 200),
-                fullOutput: output,
-                mode: currentMode,
-                intensity: intensitySlider.value,
-                timestamp: new Date().toLocaleString(),
-            });
+        function addToHistory(inp, out) {
+            history.unshift({ input: inp.substring(0, 200), output: out.substring(0, 200), fullOutput: out, mode: currentMode, intensity: intensitySlider.value, timestamp: new Date().toLocaleString() });
             if (history.length > 20) history.pop();
             localStorage.setItem('humanizer-history-v2', JSON.stringify(history));
         }
 
         function renderHistory() {
-            historyList.innerHTML = history.map((item, i) => `
-                <div class="history-item" data-index="${i}">
-                    <div class="preview">${item.output}</div>
-                    <div class="meta">${item.mode} / ${item.intensity}% / ${item.timestamp}</div>
-                </div>
-            `).join('');
+            historyList.innerHTML = history.map((item, i) =>
+                '<div class="history-item" data-index="' + i + '"><div class="preview">' + item.output + '</div><div class="meta">' + item.mode + ' / ' + item.intensity + '% / ' + item.timestamp + '</div></div>'
+            ).join('');
         }
 
-        // =============================================
-        // STATS UPDATE
-        // =============================================
-        function updateInputStats() {
-            const text = inputText.value;
-            inputChars.textContent = text.length + ' characters';
+        function updateStats(src) {
+            const text = src || inputText.value;
+            inputChars.textContent = inputText.value.length + ' characters';
             wordCountEl.textContent = countWords(text);
             sentenceCountEl.textContent = countSentences(text);
-
-            const risk = computeAIRisk(text);
+            const risk = computeRisk(text);
             aiScoreEl.textContent = risk;
             aiScoreEl.className = 'value';
-            if (risk !== '--') {
-                const val = parseInt(risk);
-                if (val > 55) aiScoreEl.classList.add('danger');
-                else if (val > 30) aiScoreEl.classList.add('warning');
-                else aiScoreEl.classList.add('success');
-            }
-
+            if (risk !== '--') { const v = parseInt(risk); aiScoreEl.classList.add(v > 50 ? 'danger' : v > 25 ? 'warning' : 'success'); }
             const burst = computeBurstiness(text);
             burstScoreEl.textContent = burst;
             burstScoreEl.className = 'value';
-            if (burst !== '--') {
-                const val = parseFloat(burst);
-                if (val > 8) burstScoreEl.classList.add('success');
-                else if (val > 5) burstScoreEl.classList.add('warning');
-                else burstScoreEl.classList.add('danger');
-            }
+            if (burst !== '--') { const v = parseFloat(burst); burstScoreEl.classList.add(v > 8 ? 'success' : v > 5 ? 'warning' : 'danger'); }
         }
 
-        function updateOutputStats() {
-            outputChars.textContent = outputText.value.length + ' characters';
-        }
+        // ===== EVENT LISTENERS =====
+        document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => {
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active'); currentMode = btn.dataset.mode;
+        }));
 
-        // =============================================
-        // EVENT LISTENERS
-        // =============================================
+        document.querySelectorAll('.toggle-chip').forEach(chip => chip.addEventListener('click', () => {
+            chip.classList.toggle('active'); features[chip.dataset.feature] = chip.classList.contains('active');
+        }));
 
-        // Mode selector
-        document.querySelectorAll('.mode-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentMode = btn.dataset.mode;
-            });
-        });
+        intensitySlider.addEventListener('input', () => intensityValue.textContent = intensitySlider.value + '%');
+        inputText.addEventListener('input', () => updateStats());
 
-        // Feature toggles
-        document.querySelectorAll('.toggle-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                chip.classList.toggle('active');
-                features[chip.dataset.feature] = chip.classList.contains('active');
-            });
-        });
-
-        // Intensity slider
-        intensitySlider.addEventListener('input', () => {
-            intensityValue.textContent = intensitySlider.value + '%';
-        });
-
-        // Input text stats
-        inputText.addEventListener('input', updateInputStats);
-
-        // Humanize button
         humanizeBtn.addEventListener('click', () => {
             const text = inputText.value.trim();
             if (!text) { showToast('Paste some text first!'); return; }
-
-            humanizeBtn.classList.add('loading');
-            humanizeBtn.disabled = true;
-            progressBar.classList.add('active');
-            progressFill.style.width = '0%';
+            humanizeBtn.classList.add('loading'); humanizeBtn.disabled = true;
+            progressBar.classList.add('active'); progressFill.style.width = '0%';
             chunkInfo.classList.add('visible');
-
-            // Simulate chunked processing with progress
             const chunks = decomposeIntoChunks(text);
-            const totalChunks = chunks.length;
-            chunkInfo.textContent = 'Processing ' + totalChunks + ' semantic chunks...';
-
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += Math.random() * 15 + 5;
-                if (progress > 90) progress = 90;
-                progressFill.style.width = progress + '%';
-            }, 100);
+            chunkInfo.textContent = 'Processing ' + chunks.length + ' semantic chunks...';
+            let prog = 0;
+            const pi = setInterval(() => { prog += Math.random() * 12 + 3; if (prog > 90) prog = 90; progressFill.style.width = prog + '%'; }, 80);
 
             setTimeout(() => {
-                clearInterval(progressInterval);
-                progressFill.style.width = '100%';
-
+                clearInterval(pi); progressFill.style.width = '100%';
                 const result = humanize(text);
-                outputText.value = result;
-                copyBtn.disabled = false;
-
+                outputText.value = result; copyBtn.disabled = false;
                 changeCountEl.textContent = totalChanges;
-                updateOutputStats();
-
-                // Update stats for output
-                const risk = computeAIRisk(result);
-                aiScoreEl.textContent = risk;
-                aiScoreEl.className = 'value';
-                if (risk !== '--') {
-                    const val = parseInt(risk);
-                    if (val > 55) aiScoreEl.classList.add('danger');
-                    else if (val > 30) aiScoreEl.classList.add('warning');
-                    else aiScoreEl.classList.add('success');
-                }
-
-                const burst = computeBurstiness(result);
-                burstScoreEl.textContent = burst;
-                burstScoreEl.className = 'value';
-                if (burst !== '--') {
-                    const val = parseFloat(burst);
-                    if (val > 8) burstScoreEl.classList.add('success');
-                    else if (val > 5) burstScoreEl.classList.add('warning');
-                    else burstScoreEl.classList.add('danger');
-                }
-
+                outputChars.textContent = result.length + ' characters';
+                updateStats(result);
                 showDiff(text, result);
                 addToHistory(text, result);
-
-                humanizeBtn.classList.remove('loading');
-                humanizeBtn.disabled = false;
-                chunkInfo.textContent = 'Processed ' + totalChunks + ' chunks with ' + totalChanges + ' transformations.';
-
-                setTimeout(() => {
-                    progressBar.classList.remove('active');
-                }, 1000);
-
-                showToast('Stealth humanization complete: ' + totalChanges + ' changes across ' + totalChunks + ' chunks.');
-            }, 600 + totalChunks * 50);
+                humanizeBtn.classList.remove('loading'); humanizeBtn.disabled = false;
+                chunkInfo.textContent = 'Processed ' + chunks.length + ' chunks, ' + totalChanges + ' transformations applied.';
+                setTimeout(() => progressBar.classList.remove('active'), 1000);
+                showToast('Done: ' + totalChanges + ' deep transformations.');
+            }, 500 + chunks.length * 40);
         });
 
-        // Copy button
         copyBtn.addEventListener('click', () => {
-            if (outputText.value) {
-                navigator.clipboard.writeText(outputText.value).then(() => {
-                    showToast('Copied to clipboard!');
-                }).catch(() => {
-                    outputText.select();
-                    document.execCommand('copy');
-                    showToast('Copied to clipboard!');
-                });
-            }
+            if (outputText.value) navigator.clipboard.writeText(outputText.value).then(() => showToast('Copied!')).catch(() => { outputText.select(); document.execCommand('copy'); showToast('Copied!'); });
         });
 
-        // Clear button
         clearBtn.addEventListener('click', () => {
-            inputText.value = '';
-            outputText.value = '';
-            copyBtn.disabled = true;
-            diffPanel.classList.remove('visible');
-            analysisPanel.classList.remove('visible');
-            chunkInfo.classList.remove('visible');
-            changeCountEl.textContent = '0';
-            updateInputStats();
-            updateOutputStats();
+            inputText.value = ''; outputText.value = ''; copyBtn.disabled = true;
+            diffPanel.classList.remove('visible'); analysisPanel.classList.remove('visible');
+            chunkInfo.classList.remove('visible'); changeCountEl.textContent = '0';
+            updateStats(); outputChars.textContent = '0 characters';
         });
 
-        // Analyze button
         analyzeBtn.addEventListener('click', () => {
-            const text = outputText.value.trim() || inputText.value.trim();
-            if (!text) { showToast('No text to analyze!'); return; }
-            renderAnalysis(text);
-            showToast('Analysis complete.');
+            const t = outputText.value.trim() || inputText.value.trim();
+            if (!t) { showToast('No text to analyze!'); return; }
+            renderAnalysis(t); showToast('Analysis complete.');
         });
 
-        // History toggle
         historyBtn.addEventListener('click', () => {
             historyPanel.classList.toggle('visible');
             if (historyPanel.classList.contains('visible')) renderHistory();
         });
 
-        // History item click
         historyList.addEventListener('click', (e) => {
             const item = e.target.closest('.history-item');
-            if (item) {
-                const idx = parseInt(item.dataset.index);
-                outputText.value = history[idx].fullOutput || history[idx].output;
-                updateOutputStats();
-                showToast('Loaded from history');
-            }
+            if (item) { const i = parseInt(item.dataset.index); outputText.value = history[i].fullOutput || history[i].output; outputChars.textContent = outputText.value.length + ' characters'; showToast('Loaded from history'); }
         });
 
-        // Keyboard shortcut
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                humanizeBtn.click();
-            }
-        });
-
-        // Init
-        updateInputStats();
-        updateOutputStats();
+        document.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') humanizeBtn.click(); });
+        updateStats();
+        outputChars.textContent = '0 characters';
     })();
     </script>
 </body>
