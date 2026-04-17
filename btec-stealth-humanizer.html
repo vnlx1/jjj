@@ -557,8 +557,8 @@
     <div class="container">
         <div class="header">
             <h1>BTEC Stealth Humanizer</h1>
-            <p class="subtitle">Multi-layer cognitive humanization engine with chunked semantic processing</p>
-            <span class="version-tag">v2.0 STEALTH</span>
+            <p class="subtitle">Three-pass LLM rewrite with perplexity + burstiness injection to reduce AI-detection risk</p>
+            <span class="version-tag">v3.0 FULL-STACK</span>
         </div>
 
         <!-- Stats Bar -->
@@ -628,7 +628,7 @@
                 <span>Input Text</span>
                 <span class="char-count" id="input-chars">0 characters</span>
             </div>
-            <textarea id="input-text" placeholder="Paste your AI-generated text here. The stealth engine will decompose it into semantic chunks and apply multi-layer cognitive humanization to produce output that reads like genuine human writing."></textarea>
+            <textarea id="input-text" placeholder="Paste your AI-generated text here. The engine runs it through a three-pass LLM rewrite (flow, burstiness, tell-strip) plus deterministic post-processing to reduce AI-detection risk. Result is not guaranteed to bypass every detector — check the AI Risk score and re-run if needed."></textarea>
         </div>
 
         <!-- Progress -->
@@ -655,7 +655,7 @@
                 <span>Humanized Output</span>
                 <span class="char-count" id="output-chars">0 characters</span>
             </div>
-            <textarea id="output-text" readonly placeholder="Humanized text will appear here..."></textarea>
+            <textarea id="output-text" readonly placeholder="Humanized text will appear here. Click Copy to grab it."></textarea>
         </div>
 
         <!-- Analysis Panel -->
@@ -682,6 +682,14 @@
     <script>
     (function() {
         'use strict';
+
+        // =============================================
+        // Backend config
+        // Set window.BTEC_BACKEND_URL before this script loads to override,
+        // or leave empty to use same-origin (deployed behind a reverse proxy).
+        // =============================================
+        const BACKEND_URL = (window.BTEC_BACKEND_URL || '').replace(/\/+$/, '');
+        const HUMANIZE_ENDPOINT = BACKEND_URL + '/api/humanize';
 
         // =============================================
         // DOM References
@@ -1784,8 +1792,48 @@
         // Input text stats
         inputText.addEventListener('input', updateInputStats);
 
-        // Humanize button
-        humanizeBtn.addEventListener('click', () => {
+        // Humanize button — calls the FastAPI backend. Falls back to the
+        // local client-side algorithm if the backend is unreachable so the
+        // tool still works when opened as a plain static file.
+        async function humanizeViaBackend(text) {
+            const response = await fetch(HUMANIZE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    text: text,
+                    mode: currentMode,
+                    intensity: parseInt(intensitySlider.value, 10),
+                }),
+            });
+            if (!response.ok) {
+                const errTxt = await response.text().catch(() => '');
+                throw new Error('Backend error ' + response.status + ': ' + errTxt);
+            }
+            return await response.json();
+        }
+
+        function applyStatValue(el, raw, thresholds) {
+            // thresholds = { good: number, warn: number, dir: 'high'|'low' }
+            // 'high' means higher is better (burstiness). 'low' means lower is better (AI risk).
+            el.className = 'value';
+            if (raw === null || raw === undefined || Number.isNaN(raw)) {
+                el.textContent = '--';
+                return;
+            }
+            el.textContent = (typeof raw === 'number' ? raw : parseFloat(raw)).toString();
+            const val = typeof raw === 'number' ? raw : parseFloat(raw);
+            if (thresholds.dir === 'low') {
+                if (val > thresholds.warn) el.classList.add('danger');
+                else if (val > thresholds.good) el.classList.add('warning');
+                else el.classList.add('success');
+            } else {
+                if (val > thresholds.good) el.classList.add('success');
+                else if (val > thresholds.warn) el.classList.add('warning');
+                else el.classList.add('danger');
+            }
+        }
+
+        humanizeBtn.addEventListener('click', async () => {
             const text = inputText.value.trim();
             if (!text) { showToast('Paste some text first!'); return; }
 
@@ -1794,64 +1842,73 @@
             progressBar.classList.add('active');
             progressFill.style.width = '0%';
             chunkInfo.classList.add('visible');
-
-            // Simulate chunked processing with progress
-            const chunks = decomposeIntoChunks(text);
-            const totalChunks = chunks.length;
-            chunkInfo.textContent = 'Processing ' + totalChunks + ' semantic chunks...';
+            chunkInfo.textContent = 'Calling LLM — this takes 15-45s for a 3-pass rewrite...';
 
             let progress = 0;
             const progressInterval = setInterval(() => {
-                progress += Math.random() * 15 + 5;
-                if (progress > 90) progress = 90;
+                progress += Math.random() * 6 + 2;
+                if (progress > 92) progress = 92;
                 progressFill.style.width = progress + '%';
-            }, 100);
+            }, 400);
 
-            setTimeout(() => {
-                clearInterval(progressInterval);
-                progressFill.style.width = '100%';
+            let result = '';
+            let serverAiScore = null;
+            let serverBurst = null;
+            let passCount = null;
+            let usedFallback = false;
 
-                const result = humanize(text);
-                outputText.value = result;
-                copyBtn.disabled = false;
+            try {
+                const data = await humanizeViaBackend(text);
+                result = (data.humanized || '').trim();
+                serverAiScore = (typeof data.ai_score === 'number') ? data.ai_score : null;
+                serverBurst = (typeof data.burstiness === 'number') ? data.burstiness : null;
+                passCount = data.passes || null;
+                if (!result) throw new Error('Empty backend response');
+            } catch (err) {
+                console.warn('Backend humanize failed, falling back to local:', err);
+                usedFallback = true;
+                result = humanize(text);
+            }
 
-                changeCountEl.textContent = totalChanges;
-                updateOutputStats();
+            clearInterval(progressInterval);
+            progressFill.style.width = '100%';
 
-                // Update stats for output
-                const risk = computeAIRisk(result);
-                aiScoreEl.textContent = risk;
-                aiScoreEl.className = 'value';
-                if (risk !== '--') {
-                    const val = parseInt(risk);
-                    if (val > 55) aiScoreEl.classList.add('danger');
-                    else if (val > 30) aiScoreEl.classList.add('warning');
-                    else aiScoreEl.classList.add('success');
-                }
+            outputText.value = result;
+            copyBtn.disabled = false;
 
-                const burst = computeBurstiness(result);
-                burstScoreEl.textContent = burst;
-                burstScoreEl.className = 'value';
-                if (burst !== '--') {
-                    const val = parseFloat(burst);
-                    if (val > 8) burstScoreEl.classList.add('success');
-                    else if (val > 5) burstScoreEl.classList.add('warning');
-                    else burstScoreEl.classList.add('danger');
-                }
+            changeCountEl.textContent = totalChanges;
+            updateOutputStats();
 
-                showDiff(text, result);
-                addToHistory(text, result);
+            // AI Risk: lower is better. Prefer server score when available.
+            const riskVal = (serverAiScore != null) ? serverAiScore : (function() {
+                const r = computeAIRisk(result);
+                return (r === '--') ? null : parseFloat(r);
+            })();
+            applyStatValue(aiScoreEl, riskVal, { good: 30, warn: 55, dir: 'low' });
 
-                humanizeBtn.classList.remove('loading');
-                humanizeBtn.disabled = false;
-                chunkInfo.textContent = 'Processed ' + totalChunks + ' chunks with ' + totalChanges + ' transformations.';
+            // Burstiness: higher is better. Prefer server value.
+            const burstVal = (serverBurst != null) ? serverBurst : (function() {
+                const b = computeBurstiness(result);
+                return (b === '--') ? null : parseFloat(b);
+            })();
+            applyStatValue(burstScoreEl, burstVal, { good: 8, warn: 5, dir: 'high' });
 
-                setTimeout(() => {
-                    progressBar.classList.remove('active');
-                }, 1000);
+            showDiff(text, result);
+            addToHistory(text, result);
 
-                showToast('Stealth humanization complete: ' + totalChanges + ' changes across ' + totalChunks + ' chunks.');
-            }, 600 + totalChunks * 50);
+            humanizeBtn.classList.remove('loading');
+            humanizeBtn.disabled = false;
+            const statusBits = [];
+            if (usedFallback) statusBits.push('local fallback (backend unreachable)');
+            else if (passCount) statusBits.push(passCount + '-pass LLM rewrite');
+            if (riskVal != null) statusBits.push('AI risk ' + riskVal);
+            chunkInfo.textContent = statusBits.length ? 'Done — ' + statusBits.join(' • ') + '.' : 'Done.';
+
+            setTimeout(() => { progressBar.classList.remove('active'); }, 1200);
+
+            showToast(usedFallback
+                ? 'Backend unreachable — used local fallback.'
+                : 'Humanization complete (' + (passCount || 1) + ' passes). AI risk: ' + (riskVal != null ? riskVal : 'n/a') + '.');
         });
 
         // Copy button
