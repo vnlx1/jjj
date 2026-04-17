@@ -387,42 +387,79 @@ def _split_sentences(text: str) -> list[str]:
     return [p.strip() for p in pieces if p.strip()]
 
 
-def _enforce_burstiness(text: str) -> str:
-    """Mechanically split one long sentence if the whole paragraph is too uniform.
+_SPLIT_CONJUNCTIONS = (", and ", ", but ", ", or ", ", so ", ", yet ", " and ", " but ", " or ", " so ", " yet ")
 
-    Detectors flag uniform sentence lengths as AI. If the standard deviation
-    of sentence lengths is below 4 and we have at least 3 sentences, pick the
-    longest sentence and split it at the first internal comma that lands
-    past 10 words. This guarantees at least one short sentence exists.
+
+def _find_split_point(sentence: str, min_word: int = 7) -> int | None:
+    """Return a char index inside `sentence` to split at (after word ``min_word``)."""
+    words = sentence.split(" ")
+    if len(words) < min_word + 3:
+        return None
+    # Prefer commas first.
+    char_pos = 0
+    for i, w in enumerate(words):
+        char_pos += len(w) + 1  # +1 for the trailing space
+        if i + 1 >= min_word and w.endswith(","):
+            return char_pos  # split right after the comma
+    # Fall back to conjunctions.
+    lowered = sentence.lower()
+    for conj in _SPLIT_CONJUNCTIONS:
+        idx = lowered.find(conj, _char_index_after_word(sentence, min_word))
+        if idx != -1:
+            # Split at the start of the conjunction.
+            return idx + 1 if conj.startswith(", ") else idx + 1
+    return None
+
+
+def _char_index_after_word(sentence: str, n: int) -> int:
+    words = sentence.split(" ")
+    if len(words) < n:
+        return len(sentence)
+    return sum(len(w) + 1 for w in words[:n])
+
+
+def _enforce_burstiness(text: str) -> str:
+    """Mechanically split sentences until stddev >= 4 or no safe split remains.
+
+    Detectors flag uniform sentence lengths as AI-written. This post-processing
+    pass guarantees at least one short sentence exists and breaks overly
+    uniform rhythm. It splits the longest sentence at a comma (preferred) or
+    a coordinating conjunction that lands past word 7.
     """
     sents = _split_sentences(text)
     if len(sents) < 3:
         return text
-    word_counts = [len(_WORD_RE.findall(s)) for s in sents]
-    if statistics.pstdev(word_counts) >= 4:
-        return text
-    # Find the longest sentence.
-    idx_long = max(range(len(sents)), key=lambda i: word_counts[i])
-    long_s = sents[idx_long]
-    # Find a comma past word 10 to split at.
-    words = long_s.split(" ")
-    if len(words) < 14:
-        return text
-    # Find comma index in words.
-    split_at: int | None = None
-    for i in range(9, len(words) - 4):
-        if words[i].endswith(","):
-            split_at = i + 1
+
+    for _ in range(3):  # up to 3 splits
+        word_counts = [len(_WORD_RE.findall(s)) for s in sents]
+        if statistics.pstdev(word_counts) >= 4 and min(word_counts) <= 7:
             break
-    if split_at is None:
-        return text
-    first = " ".join(words[:split_at]).rstrip(",") + "."
-    rest = " ".join(words[split_at:])
-    if rest and rest[0].islower():
-        rest = rest[0].upper() + rest[1:]
-    if not rest.endswith((".", "!", "?")):
-        rest += "."
-    sents[idx_long] = first + " " + rest
+        # Pick the longest sentence to split.
+        idx_long = max(range(len(sents)), key=lambda i: word_counts[i])
+        if word_counts[idx_long] < 10:
+            break
+        long_s = sents[idx_long]
+        split_at = _find_split_point(long_s, min_word=6)
+        if split_at is None:
+            break
+        first = long_s[:split_at].rstrip(", ").rstrip()
+        rest = long_s[split_at:].lstrip()
+        # Strip leading coordinating conjunction if present.
+        for conj in ("and ", "but ", "or ", "so ", "yet "):
+            if rest.lower().startswith(conj):
+                rest = rest[len(conj):]
+                break
+        if not first.endswith((".", "!", "?")):
+            first += "."
+        if rest and rest[0].islower():
+            rest = rest[0].upper() + rest[1:]
+        if not rest.endswith((".", "!", "?")):
+            rest += "."
+        if len(_WORD_RE.findall(first)) < 3 or len(_WORD_RE.findall(rest)) < 3:
+            break  # splitting produced fragments
+        sents[idx_long] = first
+        sents.insert(idx_long + 1, rest)
+
     return " ".join(sents)
 
 
@@ -488,42 +525,63 @@ def _extract_content(data: dict) -> str:
     return ""
 
 
-async def call_llm(prompt: str, *, attempt: int = 0) -> str:
-    payload = {
-        "model": POLLINATIONS_MODEL,
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are a silent text rewriter. You output only the "
-                    "rewritten text. You never explain. You never add "
-                    "quotation marks, preamble, or meta-commentary."
-                ),
-            },
-            {"role": "user", "content": prompt},
-        ],
-        "temperature": 0.9,
-        "top_p": 0.95,
-        # Reasoning models on Pollinations honor this hint; it dramatically
-        # shortens latency and keeps the final answer in `content`.
-        "reasoning_effort": "low",
-    }
+# Attempt configs for call_llm retries. Pollinations (especially
+# gpt-oss-20b) sometimes returns an empty `content`. Rotating temperature,
+# reasoning_effort, and model between attempts gets us out of bad seeds
+# without needing a paid provider.
+_LLM_ATTEMPTS: list[dict] = [
+    {"model": POLLINATIONS_MODEL, "temperature": 0.9, "reasoning_effort": "low"},
+    {"model": POLLINATIONS_MODEL, "temperature": 1.1, "reasoning_effort": "low"},
+    {"model": POLLINATIONS_MODEL, "temperature": 0.7, "reasoning_effort": "medium"},
+    {"model": "openai-fast", "temperature": 0.95, "reasoning_effort": "low"},
+    {"model": "mistral", "temperature": 0.9},
+]
+
+
+async def call_llm(prompt: str) -> str:
+    system = (
+        "You are a silent text rewriter. You output only the rewritten "
+        "text. You never explain. You never add quotation marks, preamble, "
+        "or meta-commentary."
+    )
+    last_err: Exception | None = None
     async with httpx.AsyncClient(timeout=POLLINATIONS_TIMEOUT) as client:
-        resp = await client.post(POLLINATIONS_URL, json=payload)
-        resp.raise_for_status()
-        data = resp.json()
+        for i, cfg in enumerate(_LLM_ATTEMPTS):
+            payload: dict = {
+                "model": cfg["model"],
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt},
+                ],
+                "temperature": cfg.get("temperature", 0.9),
+                "top_p": 0.95,
+            }
+            if "reasoning_effort" in cfg:
+                payload["reasoning_effort"] = cfg["reasoning_effort"]
+            try:
+                resp = await client.post(POLLINATIONS_URL, json=payload)
+                resp.raise_for_status()
+                data = resp.json()
+            except httpx.HTTPError as e:
+                last_err = e
+                if i < len(_LLM_ATTEMPTS) - 1:
+                    await asyncio.sleep(0.4)
+                    continue
+                break
 
-    content = _extract_content(data)
-    if content:
-        return content
+            content = _extract_content(data)
+            if content:
+                return content
+            # Empty response on this attempt; rotate config.
+            await asyncio.sleep(0.4)
 
-    if attempt < 1:
-        await asyncio.sleep(0.3)
-        return await call_llm(prompt, attempt=attempt + 1)
-
+    if last_err is not None:
+        raise HTTPException(
+            status_code=502, detail=f"LLM provider error: {last_err}"
+        )
     raise HTTPException(
         status_code=502,
-        detail="LLM returned an empty response. Try again in a moment.",
+        detail="LLM returned an empty response after multiple attempts.",
     )
 
 
