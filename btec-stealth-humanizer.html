@@ -680,13 +680,16 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        // Default to the public Fly.io backend. Override by setting
+        // window.BTEC_BACKEND_URL before this script loads (e.g. for local dev).
+        window.BTEC_BACKEND_URL = window.BTEC_BACKEND_URL || 'https://app-nkhzjlel.fly.dev';
+    </script>
+    <script>
     (function() {
         'use strict';
 
         // =============================================
         // Backend config
-        // Set window.BTEC_BACKEND_URL before this script loads to override,
-        // or leave empty to use same-origin (deployed behind a reverse proxy).
         // =============================================
         const BACKEND_URL = (window.BTEC_BACKEND_URL || '').replace(/\/+$/, '');
         const HUMANIZE_ENDPOINT = BACKEND_URL + '/api/humanize';
