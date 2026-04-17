@@ -81,86 +81,115 @@ class HumanizeResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 _COMMON_HEADER = (
-    "You are rewriting text to read like natural human writing. "
+    "You are rewriting text so it reads like natural human writing. "
     "Output ONLY the rewritten text. "
-    "No preamble. No quotes around the output. No explanation. "
+    "No preamble. No quotes around the output. No explanation. No labels. "
     "No markdown unless the original used markdown. "
     "Preserve all facts, numbers, names, and the overall meaning. "
-    "Keep the length within ~20% of the original.\n\n"
+    "Keep the length within plus-or-minus 25% of the original.\n"
+    "\n"
+    "HARD BANS (never do these, they are AI tells):\n"
+    "- No similes of the shape 'like X after Y' or 'like X-ing Y'. "
+    "Examples to avoid: 'like spotting a rainbow after a storm', "
+    "'like picking the right spaghetti', 'like chewing bubblegum', "
+    "'like a well-oiled machine'. If you want a comparison, make it "
+    "specific and domain-relevant, not folksy.\n"
+    "- No 'game-changer', 'real gains', 'smart move', 'bottom line', "
+    "'at the end of the day', 'in this fast-paced world'.\n"
+    "- No em-dashes. No triple-parallel lists unless the source had one.\n"
+    "- No hollow intensifiers: truly, vitally, significantly, undoubtedly, "
+    "profoundly, meticulously.\n"
+    "- No hedges stacked at sentence starts (e.g. 'Honestly, I think that, to be fair, ...').\n"
+    "\n"
 )
 
 _PASS1_FLOW = (
     "Pass 1 of 3: NATURAL FLOW.\n"
-    "Rewrite the text so it sounds like a thoughtful person typing a draft, "
-    "not a finished essay. Apply:\n"
+    "Rewrite so it sounds like a thoughtful person typing a draft, not a "
+    "finished essay. Apply:\n"
     "- Contractions where natural: it's, don't, they're, can't, there's, won't, I'm.\n"
     "- Replace textbook transitions (Furthermore, Moreover, Additionally, "
-    "Consequently, Therefore, In conclusion) with casual ones (Also, Plus, "
-    "So, Still, Anyway, Look, Thing is, Bottom line).\n"
-    "- Replace AI tell-words with ordinary alternatives: delve -> dig into, "
-    "utilize -> use, comprehensive -> thorough, crucial -> key, leverage -> use, "
-    "robust -> solid, realm -> area, tapestry -> mix, plethora -> a ton of, "
+    "Consequently, Therefore, In conclusion) with ordinary ones (Also, Plus, "
+    "So, Still, Anyway, That said, One more thing).\n"
+    "- Swap AI tell-words for ordinary ones: delve -> dig into, utilize -> "
+    "use, comprehensive -> thorough, crucial -> key, leverage -> use, "
+    "robust -> solid, realm -> area, tapestry -> mix, plethora -> a lot of, "
     "pivotal -> major, ascertain -> figure out, facilitate -> help, "
-    "navigate -> get through, endeavor -> effort, paradigm -> model, "
-    "elucidate -> explain.\n"
-    "- Prefer concrete, specific words over abstract ones.\n"
-    "- Do not use em-dashes. Use commas or periods.\n"
+    "endeavor -> effort, paradigm -> model, elucidate -> explain.\n"
+    "- Prefer concrete, specific nouns and verbs over abstract ones.\n"
+    "- Do not add new metaphors. Do not add similes. If the source had none, "
+    "output should have none.\n"
 )
 
 _PASS2_BURSTINESS = (
     "Pass 2 of 3: BURSTINESS + PERPLEXITY.\n"
-    "Keep the meaning identical. Rewrite so sentence lengths vary a lot.\n"
-    "- Mix short 3-6 word sentences next to longer 25+ word sentences.\n"
-    "- Never leave three sentences in a row of similar length. Break the "
-    "rhythm on purpose.\n"
-    "- Break parallel structure. If a list has three parallel clauses, "
-    "reshape two of them so the grammatical forms differ.\n"
-    "- Inject a few unexpected but accurate word choices (perplexity). Pick "
-    "the word that's right but not the obvious one.\n"
-    "- Add one personal aside or hedge per paragraph: 'honestly', 'to be "
-    "fair', 'I guess', 'more or less', 'which, fine', 'weirdly'.\n"
-    "- Start one or two sentences with And, But, So, or Still.\n"
+    "Keep the meaning identical. Rewrite so sentence lengths vary sharply. "
+    "This is the single most important pass. Follow ALL of these:\n"
+    "- At least ONE sentence must be 3 to 6 words long. Short, blunt.\n"
+    "- At least ONE sentence must be 22+ words long with a mid-sentence clause.\n"
+    "- No two consecutive sentences may have lengths within 3 words of each other.\n"
+    "- Break parallel structure. Three parallel clauses -> reshape two so the "
+    "grammatical forms differ.\n"
+    "- Inject a few unexpected but accurate word choices. Pick the correct "
+    "but less obvious word once or twice (perplexity).\n"
+    "- Optional: up to ONE personal hedge per paragraph (not per sentence) "
+    "from: honestly, to be fair, arguably, more or less, which is fine. "
+    "Do not stack hedges.\n"
+    "- You MAY start up to two sentences with And, But, So, or Still.\n"
+    "\n"
+    "Example of the burstiness pattern you want (different topic, shown "
+    "only for rhythm):\n"
+    "'The plan works. On paper it looks solid, and in the first dry run the "
+    "numbers held up better than anyone had predicted. But nothing ever "
+    "survives first contact with a real user. So we iterated.'\n"
+    "Notice: 3 words, then 27 words, then 10 words, then 2 words. Copy that "
+    "kind of uneven rhythm.\n"
 )
 
 _PASS3_CLEANUP = (
     "Pass 3 of 3: STRIP AI TELLS.\n"
-    "Keep the meaning and structure. Scrub any remaining machine-sounding "
-    "patterns.\n"
-    "- Remove any of: 'In today's rapidly evolving', 'It is important to "
+    "Keep the sentence-length rhythm from the previous pass. Scrub any "
+    "remaining machine-sounding patterns.\n"
+    "- Delete any of: 'In today's rapidly evolving', 'It is important to "
     "note', 'As we navigate', 'In conclusion', 'In summary', 'delve into', "
-    "'a testament to', 'the landscape of', 'in the realm of'.\n"
-    "- No tri-colons (three-item parallel lists) unless the original had "
-    "one. Prefer two items or four.\n"
-    "- Remove hollow intensifiers: 'truly', 'vitally', 'significantly', "
-    "'undoubtedly' unless they add real meaning.\n"
-    "- Prefer active voice. Drop passive unless it's naturally better.\n"
+    "'a testament to', 'the landscape of', 'in the realm of', 'plays a "
+    "crucial role', 'stands as a', 'bottom line', 'at the end of the day', "
+    "'game-changer', 'real gains'.\n"
+    "- Remove any simile of the shape 'like X after Y' or 'like X-ing Y'. "
+    "Replace with a plain statement.\n"
+    "- No three-item parallel lists unless the original had one.\n"
+    "- Delete hollow intensifiers: truly, vitally, significantly, "
+    "undoubtedly, profoundly, meticulously.\n"
+    "- Prefer active voice. Drop passive unless it is naturally better.\n"
     "- Fix any em-dashes or en-dashes. Use commas or periods.\n"
+    "- Do NOT add hedges or colloquialisms that were not already in the "
+    "text. This is a clean-up pass, not a voice-injection pass.\n"
     "- Output must still read fluently. Do not introduce grammar errors.\n"
 )
 
 _MODE_FLAVOR: dict[Mode, str] = {
     "subtle": (
         "Tone: subtle. Keep the original's register, just sand off AI edges. "
-        "Light contractions and minor rewording."
+        "Light contractions, minor rewording, no slang."
     ),
     "balanced": (
-        "Tone: balanced. Conversational but still competent. Visible "
-        "burstiness but not slangy."
+        "Tone: balanced. Conversational but still competent. Clear "
+        "burstiness, no slang, no forced personality."
     ),
     "aggressive": (
-        "Tone: aggressive. Strong personal voice. Short punchy sentences "
-        "alongside rambly ones. Casual vocabulary."
+        "Tone: aggressive. Direct and blunt. Short punchy sentences next to "
+        "rambly ones. Plain vocabulary, no jargon."
     ),
     "academic": (
-        "Tone: academic human. Think grad student draft, not a textbook. "
-        "Keep domain words, add hedges (arguably, roughly, which is to say), "
-        "break rhythm."
+        "Tone: academic human. Grad student draft, not textbook. Keep domain "
+        "terms, add at most one hedge per paragraph (arguably, roughly, "
+        "which is to say), break rhythm with a short sentence."
     ),
     "stealth": (
-        "Tone: maximum stealth. Push burstiness hard. One unexpected word "
-        "per sentence. Two personal asides per paragraph. Break every "
-        "parallel structure. Add a colloquialism. Feel like a first draft "
-        "by a thoughtful but tired human."
+        "Tone: maximum stealth. Push burstiness hard. Break every parallel "
+        "structure. Pick less-obvious but accurate word choices. Feel like "
+        "a focused first draft by a competent human who edits as they go. "
+        "Do not reach for metaphors or similes."
     ),
 }
 
@@ -291,7 +320,7 @@ _AI_CLICHE_SUBS: list[tuple[re.Pattern[str], list[str]]] = [
     (re.compile(r"\butilize\b", re.I), ["use", "work with", "rely on"]),
     (re.compile(r"\bcomprehensive\b", re.I), ["thorough", "complete", "full"]),
     (re.compile(r"\bcrucial\b", re.I), ["key", "really important", "vital"]),
-    (re.compile(r"\bpivotal\b", re.I), ["key", "major", "huge"]),
+    (re.compile(r"\bpivotal\b", re.I), ["key", "major", "central"]),
     (re.compile(r"\bleverage\b", re.I), ["use", "tap into", "lean on"]),
     (
         re.compile(r"\bin\s+today'?s\s+rapidly\s+evolving\b", re.I),
@@ -299,18 +328,44 @@ _AI_CLICHE_SUBS: list[tuple[re.Pattern[str], list[str]]] = [
     ),
     (
         re.compile(r"\bit\s+is\s+important\s+to\s+note\s+that\b", re.I),
-        ["worth noting,", "fair point:", "one thing:"],
+        ["worth noting,", "one thing:", "note that"],
     ),
-    (re.compile(r"\bin\s+conclusion\b", re.I), ["so", "bottom line,", "all told,"]),
-    (re.compile(r"\bin\s+summary\b", re.I), ["so basically,", "to sum up,", "net-net,"]),
+    (re.compile(r"\bin\s+conclusion\b", re.I), ["so", "all told,", "so really,"]),
+    (re.compile(r"\bin\s+summary\b", re.I), ["so basically,", "to sum up,", "put simply,"]),
     (re.compile(r"\bas\s+we\s+navigate\b", re.I), ["as we work through", "going through"]),
     (re.compile(r"\brealm\b", re.I), ["area", "world", "field"]),
     (re.compile(r"\btapestry\b", re.I), ["mix", "blend", "web"]),
-    (re.compile(r"\bplethora\b", re.I), ["a ton of", "loads of", "plenty of"]),
+    (re.compile(r"\bplethora\b", re.I), ["a lot of", "loads of", "plenty of"]),
     (re.compile(r"\bfacilitate\b", re.I), ["help", "make easier", "enable"]),
     (re.compile(r"\bascertain\b", re.I), ["figure out", "find out", "work out"]),
     (re.compile(r"\brobust\b", re.I), ["solid", "strong", "sturdy"]),
+    (re.compile(r"\bmeticulous(?:ly)?\b", re.I), ["careful", "close", "tight"]),
+    (re.compile(r"\bprofound(?:ly)?\b", re.I), ["deep", "serious", "real"]),
+    (re.compile(r"\bmultifaceted\b", re.I), ["layered", "wide-ranging"]),
+    (re.compile(r"\bunderscore(?:s|d)?\b", re.I), ["show", "highlight", "make clear"]),
+    (re.compile(r"\bgame[-\s]?changer\b", re.I), ["big shift", "turning point"]),
+    (re.compile(r"\bat\s+the\s+end\s+of\s+the\s+day\b", re.I), ["in the end", "ultimately"]),
+    (re.compile(r"\bbottom\s+line\b", re.I), ["point is", "net-net,"]),
+    (re.compile(r"\bin\s+this\s+(?:fast[-\s]?paced|modern)\s+world\b", re.I), ["these days", "right now"]),
 ]
+
+# Kill the hokey "like X after Y" simile template outright — both GPT and the
+# humanizer model reach for it when asked for "personality" and it is a
+# strong AI tell.
+_SIMILE_KILLER = re.compile(
+    r",?\s*(?:almost\s+|just\s+)?(?:like|as|as\s+if)\s+"
+    r"(?:a\s+|an\s+|the\s+)?"
+    r"\w+(?:ing\s+|\s+)"
+    r"[^.,;!?]*?\b(?:after|through|before)\s+[^.,;!?]*",
+    re.I,
+)
+_FOLKSY_SIMILE = re.compile(
+    r",?\s*(?:almost\s+|just\s+)?(?:like|as\s+if)\s+"
+    r"(?:a\s+|an\s+|the\s+)?"
+    r"(?:well-oiled machine|rainbow|spaghetti|bubblegum|pancake|clockwork|"
+    r"ninja|rockstar|wizard|magic|champ|hero|boss|breeze)[^.,;!?]*",
+    re.I,
+)
 
 _EM_DASH = re.compile(r"\s*[\u2014\u2013]\s*")
 _QUOTED_WRAP = re.compile(r'^"(.+)"$', re.S)
@@ -318,6 +373,57 @@ _LEADING_HERE = re.compile(
     r"^\s*(here(?:'s| is) (?:the|your|a) (?:rewritten|rewrite|humanized|revised)[^\n:]*:?\s*)",
     re.I,
 )
+_SENT_FINAL_PUNCT = re.compile(r"([.!?])\s+")
+
+
+def _split_sentences(text: str) -> list[str]:
+    """Sentence splitter that preserves the trailing punctuation on each sentence."""
+    parts: list[str] = []
+    buf = text.strip()
+    if not buf:
+        return parts
+    # Split on ".!?" followed by whitespace; keep the delimiter attached.
+    pieces = re.split(r"(?<=[.!?])\s+", buf)
+    return [p.strip() for p in pieces if p.strip()]
+
+
+def _enforce_burstiness(text: str) -> str:
+    """Mechanically split one long sentence if the whole paragraph is too uniform.
+
+    Detectors flag uniform sentence lengths as AI. If the standard deviation
+    of sentence lengths is below 4 and we have at least 3 sentences, pick the
+    longest sentence and split it at the first internal comma that lands
+    past 10 words. This guarantees at least one short sentence exists.
+    """
+    sents = _split_sentences(text)
+    if len(sents) < 3:
+        return text
+    word_counts = [len(_WORD_RE.findall(s)) for s in sents]
+    if statistics.pstdev(word_counts) >= 4:
+        return text
+    # Find the longest sentence.
+    idx_long = max(range(len(sents)), key=lambda i: word_counts[i])
+    long_s = sents[idx_long]
+    # Find a comma past word 10 to split at.
+    words = long_s.split(" ")
+    if len(words) < 14:
+        return text
+    # Find comma index in words.
+    split_at: int | None = None
+    for i in range(9, len(words) - 4):
+        if words[i].endswith(","):
+            split_at = i + 1
+            break
+    if split_at is None:
+        return text
+    first = " ".join(words[:split_at]).rstrip(",") + "."
+    rest = " ".join(words[split_at:])
+    if rest and rest[0].islower():
+        rest = rest[0].upper() + rest[1:]
+    if not rest.endswith((".", "!", "?")):
+        rest += "."
+    sents[idx_long] = first + " " + rest
+    return " ".join(sents)
 
 
 def post_process(text: str, intensity: int) -> str:
@@ -328,7 +434,11 @@ def post_process(text: str, intensity: int) -> str:
         out = m.group(1).strip()
     out = _EM_DASH.sub(", ", out)
 
-    p = 0.25 + (intensity / 200.0)  # 0.25 .. 0.75
+    # Kill cringe similes first — they are high-signal AI tells.
+    out = _SIMILE_KILLER.sub("", out)
+    out = _FOLKSY_SIMILE.sub("", out)
+
+    p = 0.35 + (intensity / 200.0)  # 0.35 .. 0.85
     rng = random.Random(len(out))
     for pattern, replacements in _AI_CLICHE_SUBS:
 
@@ -339,9 +449,15 @@ def post_process(text: str, intensity: int) -> str:
 
         out = pattern.sub(_sub, out)
 
-    out = re.sub(r"  +", " ", out)
+    # Mechanical burstiness enforcement on the final text.
+    out = _enforce_burstiness(out)
+
+    # Tidy whitespace and dangling punctuation from simile removal.
+    out = re.sub(r"\s{2,}", " ", out)
     out = re.sub(r"\s+([,.;:!?])", r"\1", out)
-    return out
+    out = re.sub(r",\s*([.!?])", r"\1", out)
+    out = re.sub(r"\(\s*\)", "", out)
+    return out.strip()
 
 
 # ---------------------------------------------------------------------------
